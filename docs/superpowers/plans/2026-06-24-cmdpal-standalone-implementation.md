@@ -854,4 +854,3 @@ Every fix gets its own test, commit, and `git push`. Repeat the audit until no r
 - [ ] **Step 5: Mark the active goal complete only after all evidence passes**
 
 Call the goal completion mechanism only after the clean-clone build, retained tests, package installation, Everything scenarios, and remote synchronization are all proven.
-
