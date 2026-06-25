@@ -18,6 +18,23 @@ if (Test-Path -LiteralPath $fullPowerToysSolutionPath) {
     throw "Standalone repository must not retain the full PowerToys solution entry point: $fullPowerToysSolutionPath"
 }
 
+$forbiddenStandaloneRoots = @(
+    'installer',
+    'src/ActionRunner',
+    'src/dsc',
+    'src/gpo',
+    'src/Monaco',
+    'src/PackageIdentity',
+    'src/runner',
+    'src/Update'
+)
+$retainedForbiddenRoots = @($forbiddenStandaloneRoots | Where-Object {
+        Test-Path -LiteralPath (Join-Path $RepoRoot $_)
+    })
+if ($retainedForbiddenRoots.Count -ne 0) {
+    throw "Standalone repository retains unrelated PowerToys infrastructure roots: $($retainedForbiddenRoots -join ', ')"
+}
+
 $projects = @(Get-SolutionFilterProjects -FilterPath $filter -RepoRoot $RepoRoot)
 if ($projects.Count -lt 50) {
     throw "Expected the CmdPal filter to contain at least 50 projects; got $($projects.Count)."
