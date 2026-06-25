@@ -156,6 +156,47 @@ foreach ($platform in @('ARM64', 'x64')) {
     }
 }
 
-$resolvedDependencyCount = @(Get-ResolvedCmdPalDependencies -ProjectPaths $closureProjects).Count
+$keepManifestPath = Join-Path $RepoRoot 'tools\cmdpal\standalone-keep-roots.txt'
+if (-not (Test-Path -LiteralPath $keepManifestPath)) {
+    throw "Standalone keep manifest does not exist: $keepManifestPath"
+}
+
+$allowedRoots = @(Get-Content -LiteralPath $keepManifestPath |
+    ForEach-Object { $_.Trim().Replace('\', '/') } |
+    Where-Object { -not [string]::IsNullOrWhiteSpace($_) -and -not $_.StartsWith('#') } |
+    ForEach-Object { $_.TrimEnd('/') } |
+    Sort-Object -Unique)
+if ($allowedRoots.Count -eq 0) {
+    throw "Standalone keep manifest is empty: $keepManifestPath"
+}
+
+foreach ($root in $allowedRoots) {
+    if (-not (Test-Path -LiteralPath (Join-Path $RepoRoot $root))) {
+        throw "Standalone keep manifest references a missing path: $root"
+    }
+}
+
+$resolvedDependencies = @(Get-ResolvedCmdPalDependencies -ProjectPaths $closureProjects)
+$outsideKeepManifest = @($resolvedDependencies | Where-Object {
+        $relativePath = [IO.Path]::GetRelativePath($RepoRoot, $_).Replace('\', '/')
+        -not ($allowedRoots | Where-Object {
+                $relativePath -eq $_ -or $relativePath.StartsWith("$_/", [StringComparison]::OrdinalIgnoreCase)
+            })
+    })
+if ($outsideKeepManifest.Count -ne 0) {
+    $outsideKeepManifest | ForEach-Object {
+        Write-Error "Dependency outside keep manifest: $([IO.Path]::GetRelativePath($RepoRoot, $_).Replace('\', '/'))"
+    }
+    throw 'Standalone keep manifest is incomplete.'
+}
+
+$retainedRoots = @($resolvedDependencies | ForEach-Object {
+        $relativePath = [IO.Path]::GetRelativePath($RepoRoot, $_).Replace('\', '/')
+        $allowedRoots | Where-Object {
+            $relativePath -eq $_ -or $relativePath.StartsWith("$_/", [StringComparison]::OrdinalIgnoreCase)
+        } | Select-Object -First 1
+    } | Sort-Object -Unique)
+
 $unresolvedDependencyCount = @(Get-UnresolvedCmdPalDependencies -ProjectPaths $closureProjects).Count
-Write-Host "Verified $($projects.Count) filter projects, a $($expectedProjects.Count)-project standalone closure, $resolvedDependencyCount resolved dependencies, and $unresolvedDependencyCount preserved MSBuild-property dependencies."
+Write-Host "Verified $($projects.Count) filter projects, a $($expectedProjects.Count)-project standalone closure, $($resolvedDependencies.Count) resolved dependencies, and $unresolvedDependencyCount preserved MSBuild-property dependencies."
+Write-Host "Retained roots used by the CmdPal closure: $($retainedRoots -join ', ')"

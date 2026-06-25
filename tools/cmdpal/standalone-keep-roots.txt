@@ -1,0 +1,25 @@
+# Source roots required by the standalone CmdPal closure.
+src/modules/cmdpal
+src/common/CalculatorEngineCommon
+src/common/Common.UI.Controls
+src/common/ManagedCommon
+src/common/ManagedCsWin32
+src/common/ManagedTelemetry
+src/common/Telemetry
+src/common/SettingsAPI
+src/common/UITestAutomation
+src/common/interop
+src/common/logger
+src/common/version
+src/settings-ui/Settings.UI.Library
+src/codeAnalysis
+src/modules/MouseUtils
+src/modules/powerdisplay
+src/modules/ZoomIt
+src/Common.Dotnet.AotCompatibility.props
+src/Common.Dotnet.CsWinRT.props
+
+# Build and documentation infrastructure retained for the standalone graph.
+tools/build
+tools/cmdpal
+doc/devdocs/development
