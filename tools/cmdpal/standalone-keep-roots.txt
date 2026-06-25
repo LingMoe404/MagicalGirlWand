@@ -10,9 +10,12 @@ src/common/SettingsAPI
 src/common/UITestAutomation
 src/common/interop
 src/common/logger
+src/common/utils
 src/common/version
+src/common/debug_control.h
 src/settings-ui/Settings.UI.Library
 src/codeAnalysis
+src/modules/interface
 src/modules/MouseUtils
 src/modules/powerdisplay
 src/modules/ZoomIt

@@ -87,6 +87,37 @@ try {
         throw "Expected one preserved unresolved dependency; got: $($unresolvedDependencies.RawValue -join ', ')"
     }
 
+    $nativeProject = Join-Path $fixtureRoot 'NativeFixture.vcxproj'
+    New-Item -ItemType Directory -Path (Join-Path $fixtureRoot 'Includes\local') | Out-Null
+    New-Item -ItemType File -Path (Join-Path $fixtureRoot 'Includes\local\native_header.h') | Out-Null
+    @'
+#include <local/native_header.h>
+#include <interface/missing_powertoy_module_interface.h>
+#include <vector>
+'@ | Set-Content -LiteralPath (Join-Path $fixtureRoot 'native.cpp') -Encoding utf8NoBOM
+    @'
+<Project>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>Includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="native.cpp" />
+  </ItemGroup>
+</Project>
+'@ | Set-Content -LiteralPath $nativeProject -Encoding utf8NoBOM
+
+    $nativeIncludes = @(Get-NativeIncludeDependencyEntries -ProjectPaths @($nativeProject) -RepoRoot $fixtureRoot)
+    if ($nativeIncludes.Where({ $_.Include -eq 'local/native_header.h' -and $_.Exists }).Count -ne 1) {
+        throw 'Expected native include dependency discovery to resolve local/native_header.h.'
+    }
+
+    $missingNativeIncludes = @(Get-MissingNativeIncludeDependencies -ProjectPaths @($nativeProject) -RepoRoot $fixtureRoot)
+    if ($missingNativeIncludes.Count -ne 1 -or $missingNativeIncludes[0] -notmatch 'interface/missing_powertoy_module_interface\.h') {
+        throw "Expected one missing native include; got: $($missingNativeIncludes -join ', ')"
+    }
+
     $nestedRoot = Join-Path $fixtureRoot 'Nested'
     New-Item -ItemType Directory -Path $nestedRoot | Out-Null
     $rootProject = Join-Path $fixtureRoot 'Root.csproj'
@@ -120,6 +151,12 @@ if ($missingLiteralDependencies.Count -ne 0) {
         Write-Error "Missing $($_.Kind) dependency: $($_.ProjectPath) -> $($_.FullPath)"
     }
     throw 'CmdPal project graph contains missing literal file dependencies.'
+}
+
+$missingNativeIncludes = @(Get-MissingNativeIncludeDependencies -ProjectPaths $closureProjects -RepoRoot $RepoRoot)
+if ($missingNativeIncludes.Count -ne 0) {
+    $missingNativeIncludes | ForEach-Object { Write-Error $_ }
+    throw 'CmdPal native project graph contains missing repo-local include dependencies.'
 }
 
 $solutionPath = Join-Path $RepoRoot 'MagicalGirlWand.slnx'
@@ -176,7 +213,13 @@ foreach ($root in $allowedRoots) {
     }
 }
 
-$resolvedDependencies = @(Get-ResolvedCmdPalDependencies -ProjectPaths $closureProjects)
+$nativeIncludeDependencies = @(Get-NativeIncludeDependencyEntries -ProjectPaths $closureProjects -RepoRoot $RepoRoot |
+    Where-Object { $_.IsRepoLocal -and $_.Exists } |
+    ForEach-Object { $_.FullPath })
+$resolvedDependencies = @(
+    Get-ResolvedCmdPalDependencies -ProjectPaths $closureProjects
+    $nativeIncludeDependencies
+) | Sort-Object -Unique
 $outsideKeepManifest = @($resolvedDependencies | Where-Object {
         $relativePath = [IO.Path]::GetRelativePath($RepoRoot, $_).Replace('\', '/')
         -not ($allowedRoots | Where-Object {

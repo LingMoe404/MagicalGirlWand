@@ -229,6 +229,192 @@ function Get-UnresolvedCmdPalDependencies {
     }
 }
 
+function Resolve-NativeIncludeDirectory {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [string] $Value,
+
+        [Parameter(Mandatory)]
+        [string] $ProjectDirectory,
+
+        [Parameter(Mandatory)]
+        [string] $RepoRoot
+    )
+
+    $trimmedValue = $Value.Trim()
+    if ([string]::IsNullOrWhiteSpace($trimmedValue) -or $trimmedValue -match '^%\(') {
+        return $null
+    }
+
+    $resolvedValue = $trimmedValue.
+        Replace('$(RepoRoot)', ([IO.Path]::GetFullPath($RepoRoot).TrimEnd('\', '/') + [IO.Path]::DirectorySeparatorChar)).
+        Replace('$(SolutionDir)', ([IO.Path]::GetFullPath($RepoRoot).TrimEnd('\', '/') + [IO.Path]::DirectorySeparatorChar))
+
+    if ($resolvedValue -match '\$\(|%\(|@\(') {
+        return $null
+    }
+
+    if ([IO.Path]::IsPathRooted($resolvedValue)) {
+        [IO.Path]::GetFullPath($resolvedValue)
+    }
+    else {
+        [IO.Path]::GetFullPath((Join-Path $ProjectDirectory $resolvedValue))
+    }
+}
+
+function Get-NativeIncludeDirectories {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [xml] $ProjectXml,
+
+        [Parameter(Mandatory)]
+        [string] $ProjectDirectory,
+
+        [Parameter(Mandatory)]
+        [string] $RepoRoot
+    )
+
+    $directories = [Collections.Generic.List[string]]::new()
+    $directories.Add([IO.Path]::GetFullPath($ProjectDirectory))
+
+    foreach ($node in $ProjectXml.SelectNodes("//*[local-name()='AdditionalIncludeDirectories']")) {
+        foreach ($rawDirectory in $node.InnerText.Split(';', [StringSplitOptions]::RemoveEmptyEntries)) {
+            $directory = Resolve-NativeIncludeDirectory -Value $rawDirectory -ProjectDirectory $ProjectDirectory -RepoRoot $RepoRoot
+            if (-not [string]::IsNullOrWhiteSpace($directory)) {
+                $directories.Add($directory)
+            }
+        }
+    }
+
+    $directories | Sort-Object -Unique
+}
+
+function Get-NativeSourceFiles {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [xml] $ProjectXml,
+
+        [Parameter(Mandatory)]
+        [string] $ProjectDirectory
+    )
+
+    foreach ($node in $ProjectXml.SelectNodes("//*[local-name()='ClCompile'][@Include]")) {
+        $include = $node.GetAttribute('Include')
+        if ([string]::IsNullOrWhiteSpace($include) -or $include -match '\$\(|%\(|@\(') {
+            continue
+        }
+
+        $sourcePath = if ([IO.Path]::IsPathRooted($include)) {
+            [IO.Path]::GetFullPath($include)
+        }
+        else {
+            [IO.Path]::GetFullPath((Join-Path $ProjectDirectory $include))
+        }
+
+        if (Test-Path -LiteralPath $sourcePath) {
+            $sourcePath
+        }
+    }
+}
+
+function Test-PathWithinRoot {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [string] $Path,
+
+        [Parameter(Mandatory)]
+        [string] $Root
+    )
+
+    $fullPath = [IO.Path]::GetFullPath($Path)
+    $fullRoot = [IO.Path]::GetFullPath($Root).TrimEnd([IO.Path]::DirectorySeparatorChar, [IO.Path]::AltDirectorySeparatorChar)
+    $rootPrefix = $fullRoot + [IO.Path]::DirectorySeparatorChar
+
+    $fullPath.Equals($fullRoot, [StringComparison]::OrdinalIgnoreCase) -or
+        $fullPath.StartsWith($rootPrefix, [StringComparison]::OrdinalIgnoreCase)
+}
+
+function Get-NativeIncludeDependencyEntries {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [string[]] $ProjectPaths,
+
+        [Parameter(Mandatory)]
+        [string] $RepoRoot
+    )
+
+    $repoRootPath = [IO.Path]::GetFullPath($RepoRoot)
+    $includePattern = '^\s*#\s*include\s*[<"]([^>"]+)[>"]'
+    $externalIncludeRoots = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    @('winrt', 'wil', 'gsl', 'spdlog') | ForEach-Object { $externalIncludeRoots.Add($_) | Out-Null }
+
+    foreach ($project in $ProjectPaths) {
+        $projectPath = [IO.Path]::GetFullPath($project)
+        if (-not (Test-Path -LiteralPath $projectPath) -or [IO.Path]::GetExtension($projectPath) -ne '.vcxproj') {
+            continue
+        }
+
+        [xml] $projectXml = Get-Content -Raw -LiteralPath $projectPath
+        $projectDirectory = Split-Path -Parent $projectPath
+        $includeDirectories = @(Get-NativeIncludeDirectories -ProjectXml $projectXml -ProjectDirectory $projectDirectory -RepoRoot $repoRootPath)
+        $sourceFiles = @(Get-NativeSourceFiles -ProjectXml $projectXml -ProjectDirectory $projectDirectory)
+
+        foreach ($sourceFile in $sourceFiles) {
+            $sourceDirectory = Split-Path -Parent $sourceFile
+            $searchDirectories = @($sourceDirectory) + $includeDirectories | Sort-Object -Unique
+
+            foreach ($line in Get-Content -LiteralPath $sourceFile) {
+                if ($line -notmatch $includePattern) {
+                    continue
+                }
+
+                $include = $Matches[1].Replace('\', '/')
+                $includeRoot = ($include -split '/')[0]
+                $candidatePaths = @($searchDirectories | ForEach-Object {
+                        [IO.Path]::GetFullPath((Join-Path $_ $include))
+                    })
+                $existingPath = $candidatePaths | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
+                $repoCandidatePaths = @($candidatePaths | Where-Object { Test-PathWithinRoot -Path $_ -Root $repoRootPath })
+                $isRepoLocal = -not [string]::IsNullOrWhiteSpace($existingPath) -and (Test-PathWithinRoot -Path $existingPath -Root $repoRootPath)
+                $isRepoLocal = $isRepoLocal -or ($include -match '[\\/]+' -and $repoCandidatePaths.Count -gt 0 -and -not $externalIncludeRoots.Contains($includeRoot))
+
+                [pscustomobject]@{
+                    ProjectPath   = $projectPath
+                    SourcePath    = $sourceFile
+                    Include       = $include
+                    FullPath      = $existingPath
+                    CandidatePath = $repoCandidatePaths | Select-Object -First 1
+                    IsRepoLocal   = $isRepoLocal
+                    Exists        = -not [string]::IsNullOrWhiteSpace($existingPath)
+                }
+            }
+        }
+    }
+}
+
+function Get-MissingNativeIncludeDependencies {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [string[]] $ProjectPaths,
+
+        [Parameter(Mandatory)]
+        [string] $RepoRoot
+    )
+
+    Get-NativeIncludeDependencyEntries -ProjectPaths $ProjectPaths -RepoRoot $RepoRoot |
+        Where-Object { $_.IsRepoLocal -and -not $_.Exists } |
+        ForEach-Object {
+            "$($_.ProjectPath) -> $($_.SourcePath) includes missing repo-local header $($_.Include)"
+        } |
+        Sort-Object -Unique
+}
+
 function New-CmdPalStandaloneSolution {
     [CmdletBinding()]
     param(
