@@ -21,6 +21,9 @@ src/modules/powerdisplay
 src/modules/ZoomIt
 src/Common.Dotnet.AotCompatibility.props
 src/Common.Dotnet.CsWinRT.props
+src/Common.Dotnet.PrepareGeneratedFolder.targets
+src/Common.SelfContained.props
+src/settings-ui/Directory.Build.targets
 
 # Build and documentation infrastructure retained for the standalone graph.
 tools/build
