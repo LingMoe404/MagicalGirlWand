@@ -8,6 +8,16 @@ $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'Get-CmdPalDependencyClosure.ps1')
 
 $filter = Join-Path $RepoRoot 'src\modules\cmdpal\CommandPalette.slnf'
+$filterJson = Get-Content -Raw -LiteralPath $filter | ConvertFrom-Json
+if ($filterJson.solution.path.Replace('\', '/') -ne '../../../MagicalGirlWand.slnx') {
+    throw "CommandPalette.slnf must target MagicalGirlWand.slnx; got '$($filterJson.solution.path)'."
+}
+
+$fullPowerToysSolutionPath = Join-Path $RepoRoot 'PowerToys.slnx'
+if (Test-Path -LiteralPath $fullPowerToysSolutionPath) {
+    throw "Standalone repository must not retain the full PowerToys solution entry point: $fullPowerToysSolutionPath"
+}
+
 $projects = @(Get-SolutionFilterProjects -FilterPath $filter -RepoRoot $RepoRoot)
 if ($projects.Count -lt 50) {
     throw "Expected the CmdPal filter to contain at least 50 projects; got $($projects.Count)."

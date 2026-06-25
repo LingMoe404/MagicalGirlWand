@@ -428,7 +428,7 @@ function New-CmdPalStandaloneSolution {
         [string] $OutputPath
     )
 
-    $sourceSolutionPath = Join-Path $RepoRoot 'PowerToys.slnx'
+    $sourceSolutionPath = Join-Path $RepoRoot 'MagicalGirlWand.slnx'
     [xml] $sourceSolution = Get-Content -Raw -LiteralPath $sourceSolutionPath
     $sourceProjects = [Collections.Generic.Dictionary[string, System.Xml.XmlElement]]::new([StringComparer]::OrdinalIgnoreCase)
     foreach ($sourceProject in $sourceSolution.SelectNodes("//*[local-name()='Project'][@Path]")) {
@@ -458,7 +458,7 @@ function New-CmdPalStandaloneSolution {
     foreach ($projectPath in ($ProjectPaths | Sort-Object -Unique)) {
         $relativePath = [IO.Path]::GetRelativePath($RepoRoot, $projectPath).Replace('\', '/')
         if (-not $sourceProjects.ContainsKey($relativePath)) {
-            throw "Project '$relativePath' is not represented in PowerToys.slnx."
+            throw "Project '$relativePath' is not represented in MagicalGirlWand.slnx."
         }
 
         $clone = $document.ImportNode($sourceProjects[$relativePath], $true)

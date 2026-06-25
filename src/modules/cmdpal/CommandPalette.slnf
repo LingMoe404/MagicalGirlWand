@@ -1,6 +1,6 @@
 {
   "solution": {
-    "path": "..\\..\\..\\PowerToys.slnx",
+    "path": "..\\..\\..\\MagicalGirlWand.slnx",
     "projects": [
       "src\\common\\CalculatorEngineCommon\\CalculatorEngineCommon.vcxproj",
       "src\\common\\Common.UI.Controls\\Common.UI.Controls.csproj",
