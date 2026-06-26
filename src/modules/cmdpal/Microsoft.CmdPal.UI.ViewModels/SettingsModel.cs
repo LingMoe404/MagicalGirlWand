@@ -13,7 +13,7 @@ public record SettingsModel
 {
     ///////////////////////////////////////////////////////////////////////////
     // SETTINGS HERE
-    public static HotkeySettings DefaultActivationShortcut { get; } = new HotkeySettings(true, false, true, false, 0x20); // win+alt+space
+    public static HotkeySettings DefaultActivationShortcut { get; } = new HotkeySettings(false, false, true, false, 0x20); // alt+space
 
     public HotkeySettings? Hotkey { get; init; } = DefaultActivationShortcut;
 
