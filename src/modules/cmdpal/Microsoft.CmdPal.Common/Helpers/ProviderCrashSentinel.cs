@@ -236,6 +236,6 @@ public sealed class ProviderCrashSentinel
 
     private static string GetSentinelPath()
     {
-        return Path.Combine(Utilities.BaseSettingsPath("Microsoft.CmdPal"), ExtensionLoadState.SentinelFileName);
+        return Path.Combine(Utilities.BaseSettingsPath("MagicalGirlWand"), ExtensionLoadState.SentinelFileName);
     }
 }

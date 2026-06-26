@@ -15,7 +15,7 @@ public class SettingsManager : JsonSettingsManager, ISettingsInterface
 
     internal static string SettingsJsonPath()
     {
-        var directory = Utilities.BaseSettingsPath("Microsoft.CmdPal");
+        var directory = Utilities.BaseSettingsPath("MagicalGirlWand");
         Directory.CreateDirectory(directory);
 
         return Path.Combine(directory, $"{_namespace}.settings.json");

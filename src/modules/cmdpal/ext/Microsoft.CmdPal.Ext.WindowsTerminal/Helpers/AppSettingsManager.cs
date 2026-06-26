@@ -18,7 +18,7 @@ public sealed class AppSettingsManager
 
     private static string SettingsPath()
     {
-        var directory = Utilities.BaseSettingsPath("Microsoft.CmdPal");
+        var directory = Utilities.BaseSettingsPath("MagicalGirlWand");
         Directory.CreateDirectory(directory);
         return Path.Combine(directory, FileName);
     }

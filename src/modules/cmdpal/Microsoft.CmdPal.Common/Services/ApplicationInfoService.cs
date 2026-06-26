@@ -20,7 +20,7 @@ public sealed class ApplicationInfoService : IApplicationInfoService
     private const string UnpackagedCacheDirectoryName = "Cache";
 
     private readonly Lazy<string> _cacheDirectory;
-    private readonly Lazy<string> _configDirectory = new(() => Utilities.BaseSettingsPath("Microsoft.CmdPal"));
+    private readonly Lazy<string> _configDirectory = new(() => Utilities.BaseSettingsPath("MagicalGirlWand"));
     private readonly Lazy<bool> _isElevated;
     private readonly Lazy<string> _logDirectory;
     private readonly Lazy<AppPackagingFlavor> _packagingFlavor;
@@ -99,7 +99,7 @@ public sealed class ApplicationInfoService : IApplicationInfoService
     {
         if (PackagingFlavor != AppPackagingFlavor.Packaged)
         {
-            return Path.Combine(Utilities.BaseSettingsPath("Microsoft.CmdPal"), UnpackagedCacheDirectoryName);
+            return Path.Combine(Utilities.BaseSettingsPath("MagicalGirlWand"), UnpackagedCacheDirectoryName);
         }
 
         try
@@ -115,7 +115,7 @@ public sealed class ApplicationInfoService : IApplicationInfoService
             CoreLogger.LogError("Failed to resolve packaged cache directory", ex);
         }
 
-        return Path.Combine(Utilities.BaseSettingsPath("Microsoft.CmdPal"), UnpackagedCacheDirectoryName);
+        return Path.Combine(Utilities.BaseSettingsPath("MagicalGirlWand"), UnpackagedCacheDirectoryName);
     }
 
     private static AppPackagingFlavor DeterminePackagingFlavor()

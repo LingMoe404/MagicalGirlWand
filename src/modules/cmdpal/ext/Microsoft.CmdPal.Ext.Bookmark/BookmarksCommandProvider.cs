@@ -36,7 +36,7 @@ public sealed partial class BookmarksCommandProvider : CommandProvider
 
     private static string StateJsonPath()
     {
-        var directory = Utilities.BaseSettingsPath("Microsoft.CmdPal");
+        var directory = Utilities.BaseSettingsPath("MagicalGirlWand");
         Directory.CreateDirectory(directory);
         return Path.Combine(directory, "bookmarks.json");
     }

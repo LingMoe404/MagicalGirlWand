@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation
+// Copyright (c) Microsoft Corporation
 // The Microsoft Corporation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -82,7 +82,7 @@ public class SettingsManager : JsonSettingsManager, ISettingsInterface
 
     private static string SettingsJsonPath()
     {
-        var directory = Utilities.BaseSettingsPath("Microsoft.CmdPal");
+        var directory = Utilities.BaseSettingsPath("MagicalGirlWand");
         Directory.CreateDirectory(directory);
 
         return Path.Combine(directory, $"{_namespace}.settings.json");
@@ -90,7 +90,7 @@ public class SettingsManager : JsonSettingsManager, ISettingsInterface
 
     private static string HistoryStateJsonPath()
     {
-        var directory = Utilities.BaseSettingsPath("Microsoft.CmdPal");
+        var directory = Utilities.BaseSettingsPath("MagicalGirlWand");
         Directory.CreateDirectory(directory);
 
         // now, the state is just next to the exe

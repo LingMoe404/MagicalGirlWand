@@ -32,7 +32,7 @@ internal sealed class SettingsManager : JsonSettingsManager
 
     private static string SettingsJsonPath()
     {
-        var directory = Utilities.BaseSettingsPath("Microsoft.CmdPal");
+        var directory = Utilities.BaseSettingsPath("MagicalGirlWand");
         Directory.CreateDirectory(directory);
         return Path.Combine(directory, $"{Namespace}.settings.json");
     }
