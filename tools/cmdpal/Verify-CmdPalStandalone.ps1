@@ -40,6 +40,8 @@ $forbiddenStandaloneRoots = @(
     '.pipelines/verifyNoticeMdAgainstNugetPackages.ps1',
     '.pipelines/verifyNugetPackages.ps1',
     '.pipelines/verifyPossibleAssetConflicts.ps1',
+    '.github/workflows/msstore-submissions.yml',
+    '.github/workflows/package-submissions.yml',
     'installer',
     'src/ActionRunner',
     'src/Common.Dotnet.FuzzTest.props',
