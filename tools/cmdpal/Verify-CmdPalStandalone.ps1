@@ -55,7 +55,20 @@ $forbiddenStandaloneRoots = @(
     'src/settings-ui/Settings.UI.UnitTests',
     'src/settings-ui/Settings.UI.XamlIndexBuilder',
     'src/settings-ui/UITest-Settings',
-    'src/Update'
+    'src/Update',
+    'tools/BugReportTool',
+    'tools/CleanUp_tool',
+    'tools/CleanUp_tool_powershell_script',
+    'tools/FancyZone_HitTest',
+    'tools/FancyZones_DrawLayoutTest',
+    'tools/FancyZones_zonable_tester',
+    'tools/module_loader',
+    'tools/MonitorReportTool',
+    'tools/project_template',
+    'tools/StylesReportTool',
+    'tools/Test-AutoLabelProduct.ps1',
+    'tools/Verification scripts',
+    'tools/clear-copilot-context.ps1'
 )
 $retainedForbiddenRoots = @($forbiddenStandaloneRoots | Where-Object {
         Test-Path -LiteralPath (Join-Path $RepoRoot $_)
