@@ -128,6 +128,11 @@ if ($cmdPalAppManifest -notmatch 'name="MagicalGirlWand\.app"') {
     throw 'app.manifest must use the standalone assembly identity MagicalGirlWand.app.'
 }
 
+$cmdPalBrandingProps = Get-Content -Raw -LiteralPath (Join-Path $RepoRoot 'src\modules\cmdpal\Microsoft.CmdPal.UI\CmdPal.Branding.props')
+if ($cmdPalBrandingProps -notmatch [regex]::Escape('Assets\MagicalGirlWand\')) {
+    throw 'CmdPal.Branding.props must target the MagicalGirlWand asset set.'
+}
+
 $cmdPalProgram = Get-Content -Raw -LiteralPath (Join-Path $RepoRoot 'src\modules\cmdpal\Microsoft.CmdPal.UI\Program.cs')
 if ($cmdPalProgram -notmatch [regex]::Escape('Logger.InitializeLogger("\\MagicalGirlWand\\Logs\\")')) {
     throw 'Program.cs must write logs under the standalone MagicalGirlWand directory.'
