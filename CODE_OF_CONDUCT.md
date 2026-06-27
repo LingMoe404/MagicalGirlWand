@@ -1,24 +1,24 @@
-# Code of Conduct
+# 行为准则
 
-MagicalGirlWand is a small, project-focused fork. Keep discussion respectful, concrete, and centered on making the project better.
+MagicalGirlWand 是一个聚焦 standalone CmdPal 的小型项目。讨论请保持尊重、具体，并围绕项目本身展开。
 
-## Expected behavior
+## 期望行为
 
-- Be direct without being hostile.
-- Assume good faith, but verify technical claims with code, logs, screenshots, or reproduction steps.
-- Keep feedback focused on the work, not the person.
-- Respect maintainers' decisions on project scope, especially the boundary that this repository is focused on standalone CmdPal.
-- Avoid spam, harassment, personal attacks, discriminatory language, or repeated off-topic arguments.
+- 可以直接指出问题，但不要攻击个人。
+- 技术判断请尽量用代码、日志、截图或复现步骤支撑。
+- 反馈聚焦改动本身，不评价贡献者身份。
+- 尊重维护者对项目范围的判断，尤其是“本仓库只聚焦 standalone CmdPal”的边界。
+- 人名、账号、人类 ID、项目名和工具名保持原文，不做翻译或改写。
 
-## Unacceptable behavior
+## 不接受的行为
 
-- Harassment, threats, insults, or discriminatory comments.
-- Publishing private information without permission.
-- Repeatedly pushing unrelated PowerToys-wide changes after being told they are out of scope.
-- Using issues or pull requests for advertising, scams, or unrelated support requests.
+- 骚扰、威胁、辱骂或歧视性言论。
+- 未经许可公开他人的隐私信息。
+- 在明确告知越界后，仍反复推动无关的 PowerToys 全量仓库改动。
+- 使用 issue 或 PR 做广告、诈骗、刷屏或无关求助。
 
-## Enforcement
+## 执行
 
-Maintainers may edit, hide, lock, or delete comments and issues that violate this code of conduct. Maintainers may also block users from participating if behavior repeatedly disrupts the project.
+维护者可以编辑、隐藏、锁定或删除违反本准则的评论和 issue。若行为持续干扰项目，维护者也可以限制相关用户参与。
 
-Security issues should follow [SECURITY.md](SECURITY.md), not public issue discussion.
+安全问题请按 [SECURITY.md](SECURITY.md) 处理，不要在公开 issue 中披露细节。

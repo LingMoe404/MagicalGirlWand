@@ -1,10 +1,7 @@
-# Command Palette Extension Toolkit
+# Command Palette Extension Toolkit 使用说明
 
-This is the C# helper layer for building CmdPal extensions in MagicalGirlWand.
+这里是用于构建 CmdPal extensions 的 C# helper layer。
 
-The fastest way to start is to run the `Create extension` command from CmdPal.
-That generates a project with the package layout, dependencies, and starter
-files already in place.
+最快的开始方式是在 CmdPal 中运行 `Create extension` 命令。它会生成已经带有 package layout、dependencies 和 starter files 的项目。
 
-Samples live under `src/modules/cmdpal/ext/SamplePagesExtension`.
-They show the extension surface from the repo we actually ship here.
+Samples 位于 `src/modules/cmdpal/ext/SamplePagesExtension`。这些示例展示了本仓库实际保留和发布的 extension surface。

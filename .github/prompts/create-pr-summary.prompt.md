@@ -9,6 +9,7 @@ description: 'Generate a MagicalGirlWand-ready pull request description from the
 
 **Repo guardrails:**
 - Treat `.github/pull_request_template.md` as the single source of truth; load it at runtime instead of embedding hardcoded content in this prompt.
+- Produce human-facing PR content with 中文优先 style. Keep human names, account names, IDs, project names, libraries, and tool names in their original form.
 - Preserve section order from the template but only surface checklist lines that are relevant for the detected changes, filling them with `[x]`/`[ ]` as appropriate.
 - Cite touched paths with inline backticks, matching the guidance in `.github/copilot-instructions.md`.
 - Call out test coverage explicitly: list automated tests run (unit/UI) or state why they are not applicable.

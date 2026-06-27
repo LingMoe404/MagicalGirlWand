@@ -1,33 +1,33 @@
-# Telemetry Trace Capture
+# Telemetry trace 采集说明
 
-This folder contains retained upstream telemetry infrastructure used by shared code. Some provider names and `.wprp` files may still use `PowerToys` naming because the implementation comes from Microsoft PowerToys.
+本目录包含保留的上游 telemetry 基础设施，供共享代码使用。部分 provider name 和 `.wprp` 文件仍可能使用 `PowerToys` 命名，因为实现来源是 Microsoft PowerToys。
 
-For MagicalGirlWand user-facing privacy documentation, see [DATA_AND_PRIVACY.md](../../../DATA_AND_PRIVACY.md).
+MagicalGirlWand 面向用户的数据与隐私说明见 [DATA_AND_PRIVACY.md](../../../DATA_AND_PRIVACY.md)。
 
-## Starting Trace Capture
+## 开始采集 trace
 
-To capture a trace with the retained provider profile:
+使用保留的 provider profile 采集 trace：
 
 ```powershell
 wpr.exe -start "PowerToys.wprp"
 ```
 
-## Stopping Trace Capture
+## 停止采集 trace
 
 ```powershell
 wpr.exe -stop "Trace.etl"
 ```
 
-## Viewing Events
+## 查看事件
 
-Open `Trace.etl` in Windows Performance Analyzer.
+用 Windows Performance Analyzer 打开 `Trace.etl`。
 
-## Notes
+## 注意
 
-- Do not attach traces publicly before checking for personal paths, command text, usernames, or other private data.
-- If provider names are renamed for MagicalGirlWand in code, update this file and [DATA_AND_PRIVACY.md](../../../DATA_AND_PRIVACY.md) together.
+- 公开上传 trace 前，请先检查其中是否包含个人路径、命令文本、用户名或其他隐私数据。
+- 如果代码中把 provider name 重命名为 MagicalGirlWand，请同步更新本文档和 [DATA_AND_PRIVACY.md](../../../DATA_AND_PRIVACY.md)。
 
-## Additional Resources
+## 参考资料
 
 - [TraceLogging on Microsoft Learn](https://learn.microsoft.com/windows/win32/tracelogging/trace-logging-portal)
 - [Recording and Viewing Events](https://learn.microsoft.com/windows/win32/tracelogging/tracelogging-record-and-display-tracelogging-events)

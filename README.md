@@ -9,7 +9,7 @@
 >
 > MagicalGirlWand 是从 Microsoft PowerToys CmdPal 拆分出的独立 Windows 命令面板仓库。它保留 CmdPal 启动器、扩展画廊、扩展 SDK、创建扩展流程与样例扩展，把仍然属于 PowerToys 全家桶的文档和模块说明逐步剥离。<br>
 > 目标很明确：只维护这个独立 CmdPal 真正需要的代码、资源、构建脚本和开发说明。<br>
-> *Built with C#, C++, WinUI / Windows App SDK and MSBuild · AI-assisted with Codex, GPT, Antigravity & Gemini.*
+> *使用 C#、C++、WinUI / Windows App SDK 和 MSBuild 构建 · OpenAI Codex / GPT 与 Google Antigravity / Gemini 协作开发。*
 
 ---
 

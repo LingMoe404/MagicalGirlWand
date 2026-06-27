@@ -34,12 +34,13 @@ Do not describe or expand unrelated PowerToys utilities as product features of t
 - Version source: `src/modules/cmdpal/custom.props`
 - Default CmdPal shortcut in code: `Alt+Space`
 - Main solution: `MagicalGirlWand.slnx`
-- Root README style should follow the sibling MagicalGirl project family when available: Chinese-first, project-specific, and only listing real current features.
+- Root README style should follow the sibling MagicalGirl project family when available: 中文优先、project-specific, and only listing real current features.
 
 ## Documentation Boundaries
 
 Keep repository documentation focused on the standalone CmdPal project.
 
+- Human-facing repository content should be 中文优先. Keep human names, account names, human IDs, project names, library names, and tool names in their original form; do not translate or rewrite names such as `LingMoe404`, `OpenAI Codex`, `Google Antigravity`, `Microsoft PowerToys`, or `CmdPal`.
 - Do not reintroduce deleted PowerToys developer documentation such as `doc/devdocs/`, `doc/specs/`, `doc/dsc/`, or `doc/gpo/README.md`.
 - Do not add README links to documents that do not exist.
 - Do not advertise PowerToys modules that are not part of the MagicalGirlWand product surface.

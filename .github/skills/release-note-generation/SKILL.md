@@ -79,7 +79,8 @@ The remaining upstream scripts in this folder are legacy helpers. Do not use Mic
 
 ## Output Style
 
-- Chinese-first if preparing public release copy for this project.
+- Public release copy for this project should be 中文优先.
+- Keep human names, account names, human IDs, project names, libraries, and tool names in their original form.
 - Mention user-visible changes first.
 - Keep internal cleanup concise.
 - Include validation notes only when they matter to users or release managers.

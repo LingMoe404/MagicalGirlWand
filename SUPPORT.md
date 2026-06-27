@@ -1,25 +1,25 @@
-# Support
+# 支持
 
-MagicalGirlWand is a standalone CmdPal-focused project. It is not the official Microsoft PowerToys support channel.
+MagicalGirlWand 是聚焦 standalone CmdPal 的项目，不是 Microsoft PowerToys 官方支持渠道。
 
-## Getting help
+## 获取帮助
 
-- Read [README.md](README.md) for current features, build commands, and project scope.
-- Search existing GitHub issues before opening a new one.
-- Open a GitHub issue for reproducible bugs, feature requests, or documentation problems in MagicalGirlWand.
-- Use [CONTRIBUTING.md](CONTRIBUTING.md) if you want to submit changes.
+- 阅读 [README.md](README.md) 了解当前功能、构建命令和项目范围。
+- 开新 issue 前，先搜索已有 GitHub issues，避免重复。
+- 可用 GitHub issue 报告 MagicalGirlWand 的可复现 bug、功能请求或文档问题。
+- 想提交改动时，请参考 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
-## What to include in bug reports
+## bug 报告需要包含什么
 
-- MagicalGirlWand version, branch, or commit.
-- Windows version and CPU architecture.
-- Exact steps to reproduce.
-- Expected behavior and actual behavior.
-- Screenshots, logs, or crash information when relevant.
-- Whether the issue also reproduces in upstream Microsoft PowerToys CmdPal, if you tested it.
+- MagicalGirlWand 版本、分支或 commit。
+- Windows 版本和 CPU 架构。
+- 精确复现步骤。
+- 预期行为和实际行为。
+- 相关截图、日志或 crash 信息。
+- 如果你测试过，也可以说明是否能在上游 Microsoft PowerToys CmdPal 复现。
 
-## Scope
+## 支持范围
 
-This repository supports the standalone CmdPal app, its built-in extensions, extension SDK, build scripts, and retained dependencies needed by that standalone graph.
+本仓库支持 standalone CmdPal 应用、内置扩展、Extension SDK、构建脚本，以及 standalone 依赖图仍然需要的保留组件。
 
-Questions about unrelated PowerToys utilities such as FancyZones, Color Picker, Advanced Paste, Image Resizer, or official PowerToys releases should go to the upstream PowerToys project instead.
+FancyZones、Color Picker、Advanced Paste、Image Resizer 或 Microsoft PowerToys 官方发行版相关问题，请转到上游 PowerToys 项目。

@@ -1,14 +1,17 @@
-The code in this directory was largely lifted from the [DevHome repo]. 
+本目录中的代码主要来自 [DevHome repo]。
 
-The specific directory we're using is 
+使用的具体目录是：
+
 https://github.com/microsoft/devhome/tree/main/extensions/CoreWidgetProvider
-This has code for all the DevHome performance widgets.
 
-Minimal changes have been made to match our style guidelines. 
-Additionally, a much larger change was made to Resources.cs, to match our own
-resource loading needs.
+该目录包含 DevHome performance widgets 相关代码。
 
-The code was lifted as of commit d52734ce0e33a82af3313d24c3c2979c37b68bab
+为了匹配本仓库的 style guidelines，这里只做了少量调整。另外，`Resources.cs` 做过较大的调整，以适配本仓库自己的 resource loading 需求。
 
+代码来源对应 commit：
+
+```text
+d52734ce0e33a82af3313d24c3c2979c37b68bab
+```
 
 [DevHome repo]: https://github.com/microsoft/devhome/

@@ -4,44 +4,47 @@ description: 'MagicalGirlWand AI contributor guidance'
 
 # MagicalGirlWand – Copilot Instructions
 
-Concise guidance for AI contributions. For complete details, see [AGENTS.md](../AGENTS.md).
+简要规则。完整说明见 [AGENTS.md](../AGENTS.md)。
 
-## Project Scope
+## 项目范围
 
-- Treat this repository as standalone CmdPal, not full Microsoft PowerToys.
-- Keep user-facing docs Chinese-first when matching the MagicalGirl project family.
-- Only list features that exist in this repository.
-- Do not restore deleted upstream docs such as `doc/devdocs/`, `doc/specs/`, `doc/dsc/`, or `doc/gpo/README.md`.
+- 把本仓库视为 standalone CmdPal，不是完整 Microsoft PowerToys。
+- 只写当前仓库真实存在的功能。
+- 不要恢复已删除的上游文档，例如 `doc/devdocs/`、`doc/specs/`、`doc/dsc/`、`doc/gpo/README.md`。
+- `docs/superpowers/` 和 `.claude/` 是本地辅助内容，不应提交。
 
-## Key Rules
+## 面向人类的内容
 
-- Make one logical change at a time.
-- Add or update tests when changing behavior.
-- Keep hot paths quiet.
-- Do not commit local-only assistant folders such as `.claude/` or `docs/superpowers/`.
-- Keep `tools/cmdpal/standalone-keep-roots.txt` aligned with the actual standalone graph.
+- README、PR 描述、release notes、支持文档、贡献文档等内容中文优先。
+- 人名、账号、人类 ID、项目名、库名和工具名保持原文，不要翻译或改写。
+- 示例：保留 **泠萌404**、`LingMoe404`、`OpenAI Codex`、`Google Antigravity`、`Microsoft PowerToys`、`CmdPal`。
 
-## Style Enforcement
+## 基本规则
 
-- C#: `src/.editorconfig`, StyleCop.Analyzers.
-- C++: `src/.clang-format`.
-- XAML: XamlStyler or the existing XAML formatting scripts when applicable.
+- 一次只做一个逻辑改动。
+- 行为变化要添加或更新测试。
+- hot path 不加噪声日志。
+- 保持 `tools/cmdpal/standalone-keep-roots.txt` 和真实 standalone graph 一致。
 
-## Common Validation
+## 风格
 
-- Docs-only changes: `git diff --check`.
-- Standalone scope changes: `pwsh -NoProfile -File tools\cmdpal\Verify-CmdPalStandalone.ps1`.
-- Build current project or solution: use `tools\build\build.cmd` or `tools\build\build.ps1`.
+- C#: `src/.editorconfig`、StyleCop.Analyzers。
+- C++: `src/.clang-format`。
+- XAML: 按现有 XAML formatting scripts 或 XamlStyler。
 
-## Component-Specific Instructions
+## 常用验证
 
-These are auto-applied based on file location:
+- 仅文档改动：`git diff --check`。
+- standalone 范围变化：`pwsh -NoProfile -File tools\cmdpal\Verify-CmdPalStandalone.ps1`。
+- 构建当前 project 或 solution：使用 `tools\build\build.cmd` 或 `tools\build\build.ps1`。
+
+## 组件说明
 
 - [CmdPal retained settings library](instructions/runner-settings-ui.instructions.md)
 - [Common libraries](instructions/common-libraries.instructions.md)
 
-## Main References
+## 主要参考
 
-- [Project README](../README.md)
-- [Contributor guide](../CONTRIBUTING.md)
-- [Agent guide](../AGENTS.md)
+- [README.md](../README.md)
+- [CONTRIBUTING.md](../CONTRIBUTING.md)
+- [AGENTS.md](../AGENTS.md)

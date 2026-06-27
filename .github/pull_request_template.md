@@ -1,33 +1,33 @@
-## Summary
+## 摘要
 
-<!-- What changed? Keep it concrete and scoped to MagicalGirlWand / standalone CmdPal. -->
+<!-- 具体说明改了什么。范围请聚焦 MagicalGirlWand / standalone CmdPal。 -->
 
-## Scope
+## 范围
 
 - [ ] CmdPal app / UI
 - [ ] CmdPal extensions
 - [ ] Extension SDK / Toolkit / template
-- [ ] Build, installer, or standalone validation
-- [ ] Documentation only
-- [ ] Other:
+- [ ] 构建、安装器或 standalone 验证
+- [ ] 仅文档
+- [ ] 其他：
 
-## Checklist
+## 检查清单
 
-- [ ] The change is one logical unit.
-- [ ] User-facing behavior is documented if it changed.
-- [ ] End-user-facing strings are localizable where applicable.
-- [ ] Tests were added or updated for behavior changes, or the reason for skipping tests is stated below.
-- [ ] `tools\cmdpal\Verify-CmdPalStandalone.ps1` was run if the change affects retained paths, projects, build files, or repository scope.
-- [ ] New dependencies are documented in `NOTICE.md` if applicable.
+- [ ] 这是一个单一逻辑改动。
+- [ ] 如果用户可见行为改变，已经更新文档。
+- [ ] 面向最终用户的字符串在适用时可以本地化。
+- [ ] 行为变化已添加或更新测试；如果没有测试，已在下方说明原因。
+- [ ] 如果改动影响保留路径、项目文件、构建文件或仓库范围，已运行 `tools\cmdpal\Verify-CmdPalStandalone.ps1`。
+- [ ] 如果引入新依赖，已更新 `NOTICE.md`。
 
-## Validation
+## 验证
 
-<!-- List commands run and their result. For docs-only changes, `git diff --check` is usually enough. -->
+<!-- 列出实际运行的命令和结果。仅文档改动通常至少运行 `git diff --check`。 -->
 
 ```text
 
 ```
 
-## Notes / Risks
+## 备注 / 风险
 
-<!-- Call out manual testing, skipped validation, migration risk, installer impact, or follow-up work. -->
+<!-- 说明手动验证、跳过的验证、迁移风险、安装器影响或后续工作。 -->

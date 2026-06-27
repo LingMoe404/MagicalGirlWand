@@ -1,22 +1,20 @@
-# File Search Built-in Extension
+# 文件搜索内置扩展查询说明 (File Search Built-in Extension)
 
-## Building Search Query
+## 构建搜索查询
 
-### Query Handling Contract
+### 查询处理约定
 
-The module does not always forward the user query to Windows Search unchanged.
+这个模块不会总是把用户查询原样传给 Windows Search。
 
-For simple free-text queries, it broadens filename matching so search feels more natural.
-For queries that already look like AQS or other Windows Search syntax, it does not rewrite them.
+对于简单的自由文本查询，它会扩展文件名匹配，让搜索更符合直觉。对于看起来已经是 AQS 或其他 Windows Search 语法的查询，它不会改写。
 
-That split is intentional.
-The module is trying to improve plain filename search without breaking structured Windows Search queries.
+这个分支是有意设计的：模块希望改善普通文件名搜索，但不能破坏结构化 Windows Search 查询。
 
-### When We Do Not Rewrite
+### 什么时候不改写
 
-If the input looks structured, we pass it through `ISearchQueryHelper.GenerateSQLFromUserQuery(...)` as-is.
+如果输入看起来是结构化查询，我们会直接传给 `ISearchQueryHelper.GenerateSQLFromUserQuery(...)`。
 
-Examples:
+示例：
 
 - `name:report`
 - `kind:folder`
@@ -26,85 +24,84 @@ Examples:
 - `size>10MB`
 - `(report)`
 
-Parentheses are treated conservatively because they can be real query syntax.
+括号会被保守处理，因为它们可能是真实查询语法。
 
-### What Broadening Means
+### broadening 是什么意思
 
-For simple free-text input we may build two filename restrictions:
+对于简单自由文本输入，我们可能构建两个文件名限制：
 
-- a literal `LIKE` restriction on `System.FileName`
-- an indexed `CONTAINS(System.ItemNameDisplay, ...)` restriction
+- 对 `System.FileName` 的 literal `LIKE` 限制。
+- 对 `System.ItemNameDisplay` 的 indexed `CONTAINS(...)` 限制。
 
-They serve different purposes:
+两者用途不同：
 
-- `LIKE` preserves the original text literally
-- `CONTAINS` gives better indexed matching and can normalize separator-like punctuation
+- `LIKE` 保留原始文本字面含义。
+- `CONTAINS` 提供更好的 indexed matching，并能规范化类似分隔符的标点。
 
-The primary query may use both.
-The fallback query uses the `LIKE` branch only.
+primary query 可能同时使用两者。fallback query 只使用 `LIKE` 分支。
 
-### Intentional Asymmetry
+### 有意的不对称
 
-The broadening is intentionally asymmetric.
+broadening 是有意不对称的。
 
-Desired behavior:
+期望行为：
 
-- `red` should find `[red]`
-- `[red]` should stay mostly literal
+- `red` 应该能找到 `[red]`。
+- `[red]` 应该基本保持字面匹配。
 
-In other words:
+也就是说：
 
-- plain terms are broadened
-- punctuation-wrapped literals are usually not normalized
-- separator punctuation inside a token can still broaden
+- 普通词会被 broadening。
+- 被标点包裹的 literal 通常不会被规范化。
+- token 内部的分隔符标点仍可能触发 broadening。
 
-This is the most important design rule in the module.
+这是本模块最重要的设计规则。
 
-### Separator Punctuation vs Wrapper Punctuation
+### 分隔符标点与包裹标点
 
-Some punctuation behaves like a separator inside filenames.
+一些标点在文件名中更像分隔符。
 
-Examples:
+示例：
 
 - `foo-bar`
 - `20220409-tontrager.xlsx`
 
-Users usually expect broadening here, because `tontrager` should still find `20220409-tontrager.xlsx`.
+用户通常期待这里可以 broadening，因为 `tontrager` 仍应找到 `20220409-tontrager.xlsx`。
 
-Other punctuation usually signals literal intent.
+另一些标点通常表示 literal 意图。
 
-Examples:
+示例：
 
 - `[red]`
 - `{draft}`
 - `<todo>`
 
-Those should usually stay on the literal filename path instead of being normalized to bare words.
+这些通常应该停留在 literal filename path，而不是被规范化为裸词。
 
-### Examples
+### 示例
 
-| User input | Behavior |
+| 用户输入 | 行为 |
 | --- | --- |
-| `red` | broad plain-text search; can match `random [red] search.txt` |
-| `[red]` | literal filename match; does not also broaden to plain `red` |
-| `foo-bar` | keeps literal `foo-bar` matching and also broadens as a separator-style term |
-| `term Kind:Folder` | broadens `term`, preserves `Kind:Folder` |
-| `%` | treated as a literal percent sign in the filename match |
-| `_` | treated as a literal underscore in the filename match |
-| `(report)` | not rewritten locally; passed through to Windows Search |
+| `red` | broad plain-text search；可以匹配 `random [red] search.txt` |
+| `[red]` | literal filename match；不会额外 broadening 到普通 `red` |
+| `foo-bar` | 保留 literal `foo-bar` 匹配，同时作为 separator-style term broadening |
+| `term Kind:Folder` | broadening `term`，保留 `Kind:Folder` |
+| `%` | 在 filename match 中作为 literal percent sign 处理 |
+| `_` | 在 filename match 中作为 literal underscore 处理 |
+| `(report)` | 不在本地改写，直接传给 Windows Search |
 
-### Why The Fallback Exists
+### 为什么需要 fallback
 
-Some inputs are valid literal filename searches but poor full-text searches.
+有些输入是有效的 literal filename search，但不适合 full-text search。
 
-Typical failure mode:
+典型失败模式：
 
-- the `CONTAINS(...)` side returns `QUERY_E_ALLNOISE`
-- or the primary query otherwise fails to produce a useful rowset
+- `CONTAINS(...)` 分支返回 `QUERY_E_ALLNOISE`。
+- 或者 primary query 无法产生有用 rowset。
 
-When both branches exist:
+当两个分支都存在时：
 
 - primary query = `CONTAINS(...) OR LIKE ...`
-- fallback query = `LIKE ...` only
+- fallback query = only `LIKE ...`
 
-The fallback exists so punctuation-heavy or noisy input can still produce useful filename matches.
+fallback 的作用是让标点较多或噪声较高的输入仍然能得到有用的文件名匹配。
