@@ -4,7 +4,7 @@ CmdPal is the standalone launcher in MagicalGirlWand.
 
 It currently ships with:
 
-- a launcher bound by default to `Win+Alt+Space`
+- a launcher bound by default to `Alt+Space`
 - the extension gallery
 - the create-extension command
 - the extension SDK and sample extensions
