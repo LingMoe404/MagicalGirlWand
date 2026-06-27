@@ -1,94 +1,85 @@
-# PowerToys Worktree Helper Scripts
+# MagicalGirlWand Worktree Helper Scripts
 
-This folder contains helper scripts to create and manage parallel Git worktree for developing multiple changes (including Copilot suggestions) concurrently without cloning the full repository each time.
+This folder contains helper scripts to create and manage parallel Git worktrees for developing multiple changes without cloning the full repository each time.
 
-## Why worktree?
-Git worktree let you have several checked‑out branches sharing a single `.git` object store. Benefits:
-- Fast context switching: no re-clone, no duplicate large binary/object downloads.
-- Lower disk usage versus multiple full clones.
-- Keeps each change isolated in its own folder so you can run builds/tests independently.
-- Enables working in parallel with Copilot generated branches (e.g., feature + quick fix + perf experiment) while the main clone stays clean.
+## Why Worktrees?
 
-Recommended: keep active parallel worktree(s) to **≤ 3** per developer to reduce cognitive load and avoid excessive incremental build invalidations.
+Git worktrees let you have several checked-out branches sharing a single `.git` object store.
 
-## Scripts Overview
+Benefits:
+
+- Fast context switching without repeated clones.
+- Lower disk usage than multiple full clones.
+- Each change stays isolated in its own folder for independent builds and tests.
+- Useful for parallel work such as a feature branch, a quick fix, and a documentation pass.
+
+Recommended: keep active parallel worktrees to three or fewer per developer.
+
+## Scripts
+
 | Script | Purpose |
-|--------|---------|
-| `New-WorktreeFromFork.ps1/.cmd` | Create a worktree from a branch in a personal fork (`<User>:<branch>` spec). Adds a temporary unique remote (e.g. `fork-abc12`). |
-| `New-WorktreeFromBranch.ps1/.cmd` | Create/reuse a worktree for an existing local or remote (origin) branch. Can normalize `origin/branch` to `branch`. |
-| `New-WorktreeFromIssue.ps1/.cmd` | Start a new issue branch from a base (default `origin/main`) using naming `issue/<number>-<slug>`. |
-| `Delete-Worktree.ps1/.cmd` | Remove a worktree and optionally its local branch / orphan fork remote. |
-| `WorktreeLib.ps1` | Shared helpers: unique folder naming, worktree listing, upstream setup, summary output, logging helpers. |
+| --- | --- |
+| `New-WorktreeFromFork.ps1/.cmd` | Create a worktree from a branch in a personal fork |
+| `New-WorktreeFromBranch.ps1/.cmd` | Create or reuse a worktree for an existing local or remote branch |
+| `New-WorktreeFromIssue.ps1/.cmd` | Start a new issue branch from a base branch, defaulting to `origin/main` |
+| `Delete-Worktree.ps1/.cmd` | Remove a worktree and optionally its local branch or temporary remote |
+| `WorktreeLib.ps1` | Shared helpers for naming, listing, upstream setup, and summary output |
 
 ## Typical Flows
-### 1. Create from a fork branch
-```
-./New-WorktreeFromFork.ps1 -Spec alice:feature/perf-tweak
-```
-Creates remote `fork-xxxxx`, fetches just that branch, creates local branch `fork-alice-feature-perf-tweak`, makes a new worktree beside the repo root.
 
-### 2. Create from an existing or remote branch
-```
-./New-WorktreeFromBranch.ps1 -Branch origin/feature/new-ui
-```
-Fetches if needed and creates a tracking branch if missing, then creates/reuses the worktree.
+### Create From a Fork Branch
 
-### 3. Start a new issue branch
+```powershell
+.\New-WorktreeFromFork.ps1 -Spec alice:feature/cmdpal-gallery
 ```
-./New-WorktreeFromIssue.ps1 -Number 1234 -Title "Crash on launch"
-```
-Creates branch `issue/1234-crash-on-launch` off `origin/main` (or `-Base`), then worktree.
 
-### 4. Delete a worktree when done
+Creates a temporary remote, fetches that branch, creates a local branch, and places a new worktree beside the repo root.
+
+### Create From an Existing Branch
+
+```powershell
+.\New-WorktreeFromBranch.ps1 -Branch origin/docs/readme-refresh
 ```
-./Delete-Worktree.ps1 -Pattern feature/perf-tweak
+
+Fetches if needed and creates or reuses the worktree.
+
+### Start a New Issue Branch
+
+```powershell
+.\New-WorktreeFromIssue.ps1 -Number 1234 -Title "CmdPal crashes on launch"
 ```
-If only one match, removes the worktree directory. Add `-Force` to discard local changes. Use `-KeepBranch` if you still need the branch, `-KeepRemote` to retain a fork remote.
+
+Creates `issue/1234-cmdpal-crashes-on-launch` from `origin/main` unless `-Base` is supplied.
+
+### Delete a Worktree
+
+```powershell
+.\Delete-Worktree.ps1 -Pattern docs/readme-refresh
+```
+
+Add `-Force` only when you intentionally want to discard local changes.
 
 ## After Creating a Worktree
-Inside the new worktree directory:
-1. Run the minimal build bootstrap in VSCode terminal:
-```
-tools\build\build-essentials.cmd
-```
-2. Build only the module(s) you need (e.g., open solution filter or run targeted project build) instead of a full PowerToys build. This speeds iteration and reduces noise.
-3. Make changes, commit, push.
-4. Finally delete the worktree when done.
 
-## Naming & Locations
-- Worktree is created as sibling folders of the repo root (e.g., `PowerToys` + `PowerToys-ab12`), using a hash/short pattern to avoid collisions.
-- Fork-based branches get local names `fork-<user>-<sanitized-branch>`.
-- Issue branches: `issue/<number>` or `issue/<number>-<slug>`.
+Inside the new worktree:
 
-## Scenarios Covered / Limitations
-Covered scenarios:
-1. From a fork branch (personal fork on GitHub).
-2. From an existing local or origin remote branch.
-3. Creating a new branch for an issue.
+1. Run `tools\build\build-essentials.cmd` if dependencies are not ready.
+2. Build only the relevant project or solution filter.
+3. Run `pwsh -NoProfile -File tools\cmdpal\Verify-CmdPalStandalone.ps1` for standalone graph changes.
+4. Commit and push.
+5. Delete the worktree when done.
 
-Not covered (manual steps needed):
-- Creating from a non-origin upstream other than a fork (add remote manually then use branch script).
-- Batch creation of multiple worktree in one command.
-- Automatic rebase / sync of many worktree at once (do that manually or script separately).
+## Naming and Locations
 
-## Best Practices
-- Keep ≤ 3 active parallel worktree(s) (e.g., main dev, a long-lived feature, a quick fix / experiment) plus the root clone.
-- Delete stale worktree early; each adds file watchers & potential incremental build churn.
-- Avoid editing the same file across multiple worktree simultaneously to reduce merge friction.
-- Run `git fetch --all --prune` periodically in the primary repo, not in every worktree.
+- Worktrees are created as sibling folders of the repo root, such as `MagicalGirlWand` and `MagicalGirlWand-ab12`.
+- Fork-based branches get local names like `fork-<user>-<sanitized-branch>`.
+- Issue branches use `issue/<number>` or `issue/<number>-<slug>`.
 
-## Troubleshooting
-| Symptom | Hint |
-|---------|------|
-| Fetch failed for fork remote | Branch name typo or fork private without auth. Try manual `git fetch <remote> <branch>`.
-| Cannot lock ref *.lock | Stale lock: run `git worktree prune` or manually delete the `.lock` file then retry.
-| Worktree already exists error | Use `git worktree list` to locate existing path; open that folder instead of creating a duplicate.
-| Local branch missing for remote | Use `git branch --track <name> origin/<name>` then re-run the branch script.
+## Safety Notes
 
-## Security & Safety Notes
-- Scripts avoid force-deleting unless you pass `-Force` (Delete script).
-- No network credentials are stored; they rely on your existing Git credential helper.
-- Always review a new fork remote URL before pushing.
+- Scripts avoid force-deleting unless `-Force` is passed.
+- No network credentials are stored; scripts use the existing Git credential helper.
+- Review a new fork remote URL before pushing.
+- Avoid editing the same file across multiple worktrees at the same time.
 
----
-Maintainers: Keep the scripts lean; avoid adding heavy dependencies or global state. Update this doc if parameters or flows change.
+Update this document when script parameters or expected flows change.

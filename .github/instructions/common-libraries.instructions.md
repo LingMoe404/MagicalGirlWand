@@ -1,11 +1,11 @@
 ---
-description: 'Guidelines for shared libraries including logging, IPC, settings, DPI, telemetry, and utilities consumed by multiple modules'
+description: 'Guidelines for retained shared libraries consumed by standalone CmdPal'
 applyTo: 'src/common/**'
 ---
 
 # Common Libraries – Shared Code Guidance
 
-Guidelines for modifying shared code in `src/common/`. Changes here can have wide-reaching impact across the entire PowerToys codebase.
+Guidelines for modifying retained shared code in `src/common/`. Changes here can affect many projects in the standalone CmdPal dependency graph, even when the code originated upstream in PowerToys.
 
 ## Scope
 
@@ -20,7 +20,7 @@ Guidelines for modifying shared code in `src/common/`. Changes here can have wid
 
 ### API Stability
 
-- Avoid breaking public headers/APIs; if changed, search & update all callers
+- Avoid breaking public headers/APIs; if changed, search and update all callers in the retained graph.
 - Coordinate ABI-impacting struct/class layout changes; keep binary compatibility
 - When modifying public interfaces, grep the entire codebase for usages
 
@@ -33,8 +33,8 @@ Guidelines for modifying shared code in `src/common/`. Changes here can have wid
 ### Dependencies
 
 - Ask before adding third-party deps or changing serialization formats
-- New dependencies must be MIT-licensed or approved by PM team
-- Add any new external packages to `NOTICE.md`
+- Do not add third-party dependencies unless they are necessary for MagicalGirlWand.
+- Add any new external packages to `NOTICE.md`.
 
 ### Logging
 
@@ -56,6 +56,7 @@ Guidelines for modifying shared code in `src/common/`. Changes here can have wid
 
 ## Validation
 
-- Build: `tools\build\build.cmd` from `src/common/` folder
-- Verify no ABI breaks: grep for changed function/struct names across codebase
-- Check logs: ensure no new logging in performance-critical paths
+- Build the changed project or solution with `tools\build\build.cmd` or `tools\build\build.ps1`.
+- Verify no ABI breaks: grep for changed function/struct names across retained callers.
+- Check logs: ensure no new logging in performance-critical paths.
+- Run `pwsh -NoProfile -File tools\cmdpal\Verify-CmdPalStandalone.ps1` when shared dependency paths or project references change.

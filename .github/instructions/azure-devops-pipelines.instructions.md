@@ -5,7 +5,7 @@ applyTo: '**/azure-pipelines.yml, **/azure-pipelines*.yml, **/*.pipeline.yml'
 
 # Azure DevOps Pipeline YAML Best Practices
 
-Guidelines for creating maintainable, secure, and efficient Azure DevOps pipelines in PowerToys.
+Guidelines for creating maintainable, secure, and efficient Azure DevOps pipelines in MagicalGirlWand when Azure Pipelines are used.
 
 ## General Guidelines
 

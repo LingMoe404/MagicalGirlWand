@@ -1,9 +1,23 @@
- - Added mouse button actions so you can choose what left, right, or middle click does in [#1234](https://github.com/microsoft/PowerToys/pull/1234) by [@PesBandi](https://github.com/PesBandi)  
+# Sample Output
 
- - Aligned window styling with current Windows theme for a cleaner look in [#1235](https://github.com/microsoft/PowerToys/pull/1235) by [@sadirano](https://github.com/sadirano)  
+```markdown
+# MagicalGirlWand v0.11.1
 
- - Ensured screen readers are notified when the selected item in the list changes for better accessibility in [#1236](https://github.com/microsoft/PowerToys/pull/1236)
+## CmdPal
 
- - Implemented configurable UI test pipeline that can use pre-built official releases instead of building everything from scratch, reducing test execution time from 2+ hours in [#1237](https://github.com/microsoft/PowerToys/pull/1237)
+- 修正默认快捷键文档，使 README 与代码中的 `Alt+Space` 保持一致。
+- 改进启动和页面导航说明，减少 PowerToys 全量仓库遗留描述。
 
- - Fixed Alt+Left Arrow navigation not working when search box contains text in [#1238](https://github.com/microsoft/PowerToys/pull/1238) by [@jiripolasek](https://github.com/jiripolasek)  
+## Extensions
+
+- 更新内置扩展说明，明确当前保留 Apps、Shell、System、Web Search、Windows Settings、Windows Terminal、Clipboard History 和 Window Walker。
+
+## Documentation
+
+- 将贡献、支持、安全和隐私文档改为 MagicalGirlWand 项目口径。
+- 标注 `docs/superpowers/` 与 `.claude/` 为本地辅助内容，不纳入发布。
+
+## Validation
+
+- `pwsh -NoProfile -File tools\cmdpal\Verify-CmdPalStandalone.ps1`
+```

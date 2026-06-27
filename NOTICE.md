@@ -2,6 +2,8 @@
 
 This software incorporates material from third parties.
 
+MagicalGirlWand is a standalone CmdPal-focused fork. This notice file intentionally retains upstream PowerToys attribution material for source, build, installer, and shared components that may still be present in the repository or dependency graph. Do not treat the sections below as a MagicalGirlWand product feature list.
+
 - Color Picker
 - Command Palette
 - File Explorer Add-ins

@@ -15,9 +15,9 @@ Provide a single-line, ready-to-paste git commit title (<= 80 characters) that r
   ```
 
 ## How to decide the title
-1. From the diff, find the dominant area (e.g., `src/modules/*`, `doc/devdocs/**`) and the change type (bug fix, docs update, config tweak).
+1. From the diff, find the dominant area (e.g., `src/modules/cmdpal/**`, `tools/cmdpal/**`, `.github/**`, root docs) and the change type (bug fix, docs update, config tweak).
 2. Draft an imperative, plain-ASCII title that:
-   - Mentions the primary component when obvious (e.g., `FancyZones:` or `Docs:`)
+   - Mentions the primary component when obvious (e.g., `CmdPal:` or `Docs:`)
    - Stays within 80 characters and has no trailing punctuation
 
 ## Final output
@@ -32,9 +32,9 @@ Use Conventional Commits style:
 - feat, fix, docs, refactor, perf, test, build, ci, chore
 
 **Scope rules**
-- Use a short, PowerToys-focused scope (one word preferred). Common scopes:
-  - Core: `runner`, `settings-ui`, `common`, `docs`, `build`, `ci`, `installer`, `gpo`, `dsc`
-  - Modules: `fancyzones`, `powerrename`, `awake`, `colorpicker`, `imageresizer`, `keyboardmanager`, `mouseutils`, `peek`, `hosts`, `file-locksmith`, `screen-ruler`, `text-extractor`, `cropandlock`, `paste`, `powerlauncher`
+- Use a short MagicalGirlWand-focused scope (one word preferred). Common scopes:
+  - Product: `cmdpal`, `extensions`, `gallery`, `sdk`, `template`
+  - Infrastructure: `common`, `settings`, `docs`, `build`, `ci`, `installer`, `agents`
 - If unclear, pick the closest module or subsystem; omit only if unavoidable
 
 **Summary rules**
@@ -42,8 +42,8 @@ Use Conventional Commits style:
 - Keep it <= 72 characters when possible; be specific, avoid “misc changes”
 
 **Examples**
-- `feat(fancyzones): add canvas template duplication`
-- `fix(mouseutils): guard crosshair toggle when dpi info missing`
-- `docs(runner): document tray icon states`
-- `build(installer): align wix v5 suffix flag`
-- `ci(ci): cache pipeline artifacts for x64`
+- `feat(gallery): add extension install status filter`
+- `fix(cmdpal): guard hotkey summon during startup`
+- `docs(agents): document standalone validation`
+- `build(installer): align MagicalGirlWand package name`
+- `ci(build): cache x64 build artifacts`

@@ -1,25 +1,33 @@
+# Telemetry Trace Capture
 
-# Overview
+This folder contains retained upstream telemetry infrastructure used by shared code. Some provider names and `.wprp` files may still use `PowerToys` naming because the implementation comes from Microsoft PowerToys.
 
-Telemetry from the PowerToys provider can be captured using the PowerToys.wprp file and WPR.
+For MagicalGirlWand user-facing privacy documentation, see [DATA_AND_PRIVACY.md](../../../DATA_AND_PRIVACY.md).
 
-## Starting trace capture
+## Starting Trace Capture
 
-To capture a trace for the PowerToys provider, run the following:
+To capture a trace with the retained provider profile:
 
-`wpr.exe -start "PowerToys.wprp"`
+```powershell
+wpr.exe -start "PowerToys.wprp"
+```
 
-## Stopping trace capture
+## Stopping Trace Capture
 
-To capture a trace for the PowerToys provider, run the following:
-
-`wpr.exe -Stop "Trace.etl"`
+```powershell
+wpr.exe -stop "Trace.etl"
+```
 
 ## Viewing Events
 
-Open the trace.etl file in WPA.
+Open `Trace.etl` in Windows Performance Analyzer.
+
+## Notes
+
+- Do not attach traces publicly before checking for personal paths, command text, usernames, or other private data.
+- If provider names are renamed for MagicalGirlWand in code, update this file and [DATA_AND_PRIVACY.md](../../../DATA_AND_PRIVACY.md) together.
 
 ## Additional Resources
-[Tracelogging on Microsoft Learn](https://learn.microsoft.com/windows/win32/tracelogging/trace-logging-portal)
 
-[Recording and Viewing Events](https://learn.microsoft.com/windows/win32/tracelogging/tracelogging-record-and-display-tracelogging-events)
+- [TraceLogging on Microsoft Learn](https://learn.microsoft.com/windows/win32/tracelogging/trace-logging-portal)
+- [Recording and Viewing Events](https://learn.microsoft.com/windows/win32/tracelogging/tracelogging-record-and-display-tracelogging-events)

@@ -1,68 +1,30 @@
 ---
-description: 'Guidelines for Runner and Settings UI components that communicate via named pipes and manage module lifecycle'
-applyTo: 'src/runner/**,src/settings-ui/**'
+description: 'Guidelines for CmdPal settings and retained settings library code'
+applyTo: 'src/settings-ui/**,src/modules/cmdpal/**'
 ---
 
-# Runner & Settings UI – Core Components Guidance
+# CmdPal Settings Guidance
 
-Guidelines for modifying the Runner (tray/module loader) and Settings UI (configuration app). These components communicate via Windows Named Pipes using JSON messages.
+This repository no longer contains the full PowerToys runner. Treat `src/settings-ui/Settings.UI.Library/` as retained shared settings code used by the standalone CmdPal graph, not as the full PowerToys Settings app product surface.
 
-## Runner (`src/runner/`)
+## Scope
 
-### Scope
+- CmdPal settings models and serialization.
+- Shortcut and conflict-related settings used by CmdPal.
+- Settings dependencies consumed by `src/modules/cmdpal/`.
+- Retained shared code needed to keep the standalone solution building.
 
-- Module bootstrap, hotkey management, settings bridge, update/elevation handling
+## Guidelines
 
-### Guidelines
-
-- If IPC/JSON contracts change, mirror updates in `src/settings-ui/**`
-- Keep module discovery in `src/runner/main.cpp` in sync when adding/removing modules
-- Keep startup lean: avoid blocking/network calls in early init path
-- Preserve GPO & elevation behaviors; confirm no regression in policy handling
-- Ask before modifying update workflow or elevation logic
-
-### Acceptance Criteria
-
-- Stable startup, consistent contracts, no unnecessary logging noise
-
-## Settings UI (`src/settings-ui/`)
-
-### Scope
-
-- WinUI/WPF UI, communicates with Runner over named pipes; manages persisted settings schema
-
-### Guidelines
-
-- Don't break settings schema silently; add migration when shape changes
-- If IPC/JSON contracts change, align with `src/runner/**` implementation
-- Keep UI responsive: marshal to UI thread for UI-bound operations
-- Reuse existing styles/resources; avoid duplicate theme keys
-- Add/adjust migration or serialization tests when changing persisted settings
-
-### Acceptance Criteria
-
-- Schema integrity preserved, responsive UI, consistent contracts, no style duplication
-
-## Shared Concerns
-
-### IPC Contract Changes
-
-When modifying the JSON message format between Runner and Settings UI:
-
-1. Update both `src/runner/` and `src/settings-ui/` in the same PR
-2. Preserve backward compatibility where possible
-3. Add migration logic for settings schema changes
-4. Test both directions of communication
-
-### Code Style
-
-- **C++ (Runner)**: Follow `.clang-format` in `src/`
-- **C# (Settings UI)**: Follow `src/.editorconfig`, use StyleCop.Analyzers
-- **XAML**: Use XamlStyler or run `.\.pipelines\applyXamlStyling.ps1 -Main`
+- Do not reintroduce `src/runner/` assumptions or full PowerToys module lifecycle documentation.
+- Do not break persisted JSON settings silently; add migration or compatibility handling when shapes change.
+- If a setting is consumed by CmdPal UI and a shared settings model, update both sides in the same change.
+- Keep UI and settings work responsive; marshal to the UI thread for UI-bound operations.
+- Reuse existing styles, resources, and settings helpers instead of adding duplicate patterns.
+- Add or update serialization and view model tests when settings behavior changes.
 
 ## Validation
 
-- Build Runner: `tools\build\build.cmd` from `src/runner/`
-- Build Settings UI: `tools\build\build.cmd` from `src/settings-ui/`
-- Test IPC: Launch both Runner and Settings UI, verify communication works
-- Schema changes: Run serialization tests if settings shape changed
+- Build the affected project or solution with `tools\build\build.cmd` or `tools\build\build.ps1`.
+- Run targeted tests under `src/modules/cmdpal/Tests/` for CmdPal view model or settings changes.
+- Run `pwsh -NoProfile -File tools\cmdpal\Verify-CmdPalStandalone.ps1` when changing retained paths or project references.

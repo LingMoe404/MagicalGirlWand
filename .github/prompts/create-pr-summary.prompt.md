@@ -1,11 +1,11 @@
 ---
 agent: 'agent'
-description: 'Generate a PowerToys-ready pull request description from the local diff'
+description: 'Generate a MagicalGirlWand-ready pull request description from the local diff'
 ---
 
 # Generate PR Summary
 
-**Goal:** Produce a ready-to-paste PR title and description that follows PowerToys conventions by comparing the current branch against a user-selected target branch.
+**Goal:** Produce a ready-to-paste PR title and description that follows MagicalGirlWand conventions by comparing the current branch against a user-selected target branch.
 
 **Repo guardrails:**
 - Treat `.github/pull_request_template.md` as the single source of truth; load it at runtime instead of embedding hardcoded content in this prompt.

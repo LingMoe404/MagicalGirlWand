@@ -1,41 +1,37 @@
-<!-- BEGIN MICROSOFT SECURITY.MD V0.0.9 BLOCK -->
+# Security Policy
 
-# Security
+MagicalGirlWand is not a Microsoft-owned repository and is not covered by the Microsoft Security Response Center process.
 
-Microsoft takes the security of our software products and services seriously, which includes all source code repositories managed through our GitHub organizations, which include [Microsoft](https://github.com/Microsoft), [Azure](https://github.com/Azure), [DotNet](https://github.com/dotnet), [AspNet](https://github.com/aspnet) and [Xamarin](https://github.com/xamarin).
+## Reporting a vulnerability
 
-If you believe you have found a security vulnerability in any Microsoft-owned repository that meets [Microsoft's definition of a security vulnerability](https://aka.ms/security.md/definition), please report it to us as described below.
+Please do not report security vulnerabilities through public GitHub issues.
 
-## Reporting security issues
+Use GitHub's private vulnerability reporting feature for this repository when available. If that is not available, contact the maintainer through the public profile linked from the repository and share only the minimum information needed to establish a secure reporting channel.
 
-**Please do not report security vulnerabilities through public GitHub issues.**
+Include as much of the following as you can:
 
-Instead, please report them to the Microsoft Security Response Center (MSRC) at [https://msrc.microsoft.com/create-report](https://aka.ms/security.md/msrc/create-report).
+- Affected version, branch, or commit.
+- A short description of the vulnerability.
+- Reproduction steps or proof-of-concept details.
+- Impact and likely attacker requirements.
+- Any logs, crash dumps, or screenshots that do not contain secrets.
 
-If you prefer to submit without logging in, send an email to [secure@microsoft.com](mailto:secure@microsoft.com). If possible, encrypt your message with our PGP key; please download it from the [Microsoft Security Response Center PGP Key page](https://aka.ms/security.md/msrc/pgp).
+## Scope
 
-You should receive a response within 24 hours. If for some reason you do not, please follow up via email to ensure we received your original message. Additional information can be found at [microsoft.com/msrc](https://www.microsoft.com/msrc).
+Security-sensitive areas include:
 
-Please include the requested information listed below (as much as you can provide) to help us better understand the nature and scope of the possible issue:
+- CmdPal command execution, URI handling, and shell integration.
+- Extension loading, extension gallery metadata, and install/update flows.
+- Installer, elevation, startup, and policy-related code.
+- File, clipboard, environment, and process access from built-in extensions.
+- Any code handling secrets, tokens, local paths, or user-provided input.
 
-- Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
-- Full paths of source file(s) related to the manifestation of the issue
-- The location of the affected source code (tag/branch/commit or direct URL)
-- Any special configuration required to reproduce the issue
-- Step-by-step instructions to reproduce the issue
-- Proof-of-concept or exploit code (if possible)
-- Impact of the issue, including how an attacker might exploit the issue
+## Out of scope
 
-This information will help us triage your report more quickly.
+- Vulnerabilities in upstream Microsoft PowerToys releases should be reported to Microsoft instead.
+- Bugs in third-party tools or extensions should be reported to their maintainers unless MagicalGirlWand changes the behavior.
+- Public feature requests, build failures, and non-sensitive bugs can use regular GitHub issues.
 
-If you are reporting for a bug bounty, more complete reports can contribute to a higher bounty award. Please visit our [Microsoft Bug Bounty Program](https://aka.ms/security.md/msrc/bounty) page for more details about our active programs.
+## Disclosure
 
-## Preferred languages
-
-We prefer all communications to be in English.
-
-## Policy
-
-Microsoft follows the principle of [Coordinated Vulnerability Disclosure](https://aka.ms/security.md/cvd).
-
-<!-- END MICROSOFT SECURITY.MD BLOCK -->
+Give maintainers reasonable time to investigate and prepare a fix before public disclosure. Do not publish exploit details while a fix is still being coordinated.

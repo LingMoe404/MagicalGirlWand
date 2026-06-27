@@ -1,21 +1,25 @@
 # Support
 
-## How to use Microsoft PowerToys
+MagicalGirlWand is a standalone CmdPal-focused project. It is not the official Microsoft PowerToys support channel.
 
-For more information about PowerToys overviews, how to use the utilities, and other tools and resources for [Windows development environments](https://learn.microsoft.com/windows/dev-environment/overview), visit [learn.microsoft.com][usingPowerToys-docs-link].
+## Getting help
 
-## How to file issues and get help  
+- Read [README.md](README.md) for current features, build commands, and project scope.
+- Search existing GitHub issues before opening a new one.
+- Open a GitHub issue for reproducible bugs, feature requests, or documentation problems in MagicalGirlWand.
+- Use [CONTRIBUTING.md](CONTRIBUTING.md) if you want to submit changes.
 
-This project uses [GitHub Issues][gh-issue] to [track bugs][gh-bug] and [feature requests][gh-feature]. Please search the existing issues before filing new issues to avoid duplicates. For new issues, file your bug or feature request as a new issue.
+## What to include in bug reports
 
-For help and questions about using this project, please visit our documentation and [Contributor's Guide][contributor] if you want to contribute to PowerToys.
+- MagicalGirlWand version, branch, or commit.
+- Windows version and CPU architecture.
+- Exact steps to reproduce.
+- Expected behavior and actual behavior.
+- Screenshots, logs, or crash information when relevant.
+- Whether the issue also reproduces in upstream Microsoft PowerToys CmdPal, if you tested it.
 
-## Microsoft support policy
+## Scope
 
-Support for PowerToys is limited to the resources listed above.
+This repository supports the standalone CmdPal app, its built-in extensions, extension SDK, build scripts, and retained dependencies needed by that standalone graph.
 
-[gh-issue]: https://github.com/microsoft/PowerToys/issues/new/choose
-[gh-bug]: https://github.com/microsoft/PowerToys/issues/new?assignees=&labels=Issue-Bug&template=bug_report.md
-[gh-feature]: https://github.com/microsoft/PowerToys/issues/new?assignees=&labels=&template=feature_request.md
-[contributor]: https://github.com/microsoft/PowerToys/blob/main/CONTRIBUTING.md
-[usingPowerToys-docs-link]: https://aka.ms/powertoys-docs
+Questions about unrelated PowerToys utilities such as FancyZones, Color Picker, Advanced Paste, Image Resizer, or official PowerToys releases should go to the upstream PowerToys project instead.

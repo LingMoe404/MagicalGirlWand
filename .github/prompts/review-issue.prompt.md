@@ -19,7 +19,7 @@ Ground evidence using `gh issue view {{issue_number}} --json number,title,body,a
 ## When to call MCP tools
 If the following MCP "github-artifacts" tools are available in the environment, use them:
 - `github_issue_images`: use when the issue/PR likely contains screenshots or other visual evidence (UI bugs, glitches, design problems).
-- `github_issue_attachments`: use when the issue/PR mentions attached ZIPs (PowerToysReport_*.zip, logs.zip, debug.zip) or asks to analyze logs/diagnostics. Always provide `extractFolder` as `Generated Files/issueReview/{{issue_number}}/logs`
+- `github_issue_attachments`: use when the issue/PR mentions attached ZIPs, logs.zip, debug.zip, crash dumps, or diagnostics. Always provide `extractFolder` as `Generated Files/issueReview/{{issue_number}}/logs`
 
 If these tools are not available (not listed by the runtime), start the MCP server "github-artifacts" first.
 
@@ -75,7 +75,7 @@ Provide actionable recommendations for issue triage and assignment:
 **When Requirement Clarity (Dimension D) is Medium or Low:**
 - Identify specific gaps in issue description: missing repro steps, unclear expected behavior, undefined acceptance criteria, missing non-functional requirements
 - Draft 3-5 clarifying questions to post as issue comment
-- Suggest additional information needed: screenshots, logs, environment details, OS version, PowerToys version, error messages
+- Suggest additional information needed: screenshots, logs, environment details, OS version, MagicalGirlWand version or commit, error messages
 - If behavior is ambiguous, propose 2-3 interpretation scenarios and ask reporter to confirm
 - Example questions:
   - "Can you provide exact steps to reproduce this issue?"
@@ -99,7 +99,7 @@ Provide actionable recommendations for issue triage and assignment:
 - Use git blame/log to find who fixed similar issues in the past
 - Search for PR authors who touched relevant files: `git log --all --format='%aN' -- <file_paths> | sort | uniq -c | sort -rn | head -5`
 - Check issue/PR history for frequent contributors to the affected module
-- Suggest 2-3 potential assignees with context: `@<username> - <reason>` (e.g., "fixed similar rendering bug in #12345", "maintains FancyZones module")
+- Suggest 2-3 potential assignees with context: `@<username> - <reason>` (e.g., "fixed similar gallery bug in #12345", "maintains CmdPal extension code")
 
 ### E) Semantic Search for Related Work
 - Use semantic_search tool to find similar issues, code patterns, or past discussions
