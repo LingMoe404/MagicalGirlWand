@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!--
     Microsoft ResX Schema
@@ -118,73 +118,73 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppName" xml:space="preserve">
-    <value>Command Palette</value>
+    <value>MagicalGirlWand</value>
     <comment>{Locked=qps-ploc,qps-ploca,qps-plocm}</comment>
   </data>
   <data name="AppNameDev" xml:space="preserve">
-    <value>Command Palette Dev</value>
+    <value>MagicalGirlWand Dev</value>
     <comment>{Locked} The dev build will never be seen in multiple languages</comment>
   </data>
   <data name="AppNameCan" xml:space="preserve">
-    <value>Command Palette Canary</value>
+    <value>MagicalGirlWand Canary</value>
     <comment>{Locked=qps-ploc,qps-ploca,qps-plocm}</comment>
   </data>
   <data name="AppNamePre" xml:space="preserve">
-    <value>Command Palette Preview</value>
+    <value>MagicalGirlWand Preview</value>
     <comment>{Locked=qps-ploc,qps-ploca,qps-plocm}</comment>
   </data>
   <data name="AppStoreName" xml:space="preserve">
-    <value>Windows Command Palette</value>
+    <value>MagicalGirlWand</value>
     <comment>{Locked=qps-ploc,qps-ploca,qps-plocm}</comment>
   </data>
   <data name="AppStoreNameDev" xml:space="preserve">
-    <value>Windows Command Palette Dev</value>
+    <value>MagicalGirlWand Dev</value>
     <comment>{Locked} The dev build will never be seen in multiple languages</comment>
   </data>
   <data name="AppStoreNameCan" xml:space="preserve">
-    <value>Windows Command Palette Canary</value>
+    <value>MagicalGirlWand Canary</value>
     <comment>{Locked=qps-ploc,qps-ploca,qps-plocm}. "Canary" in this context means an unstable or nightly build of a software product, not the bird.</comment>
   </data>
   <data name="AppStoreNamePre" xml:space="preserve">
-    <value>Windows Command Palette Preview</value>
+    <value>MagicalGirlWand Preview</value>
     <comment>{Locked=qps-ploc,qps-ploca,qps-plocm}</comment>
   </data>
   <data name="AppShortName" xml:space="preserve">
-    <value>Command Palette</value>
+    <value>MagicalGirlWand</value>
     <comment>{Locked=qps-ploc,qps-ploca,qps-plocm}</comment>
   </data>
   <data name="AppShortNameDev" xml:space="preserve">
-    <value>Command Palette Dev</value>
+    <value>MagicalGirlWand Dev</value>
     <comment>{Locked} The dev build will never be seen in multiple languages</comment>
   </data>
   <data name="AppShortNameCan" xml:space="preserve">
-    <value>Command Palette Canary</value>
+    <value>MagicalGirlWand Canary</value>
     <comment>{Locked=qps-ploc,qps-ploca,qps-plocm}</comment>
   </data>
   <data name="AppShortNamePre" xml:space="preserve">
-    <value>Command Palette Preview</value>
+    <value>MagicalGirlWand Preview</value>
     <comment>{Locked=qps-ploc,qps-ploca,qps-plocm}</comment>
   </data>
   <data name="AppDescription" xml:space="preserve">
-    <value>The Windows Command Palette</value>
+    <value>The MagicalGirlWand launcher</value>
   </data>
   <data name="AppDescriptionDev" xml:space="preserve">
-    <value>A dev build of the Command Palette</value>
+    <value>A dev build of the MagicalGirlWand launcher</value>
     <comment>{Locked} The dev build will never be seen in multiple languages</comment>
   </data>
   <data name="AppDescriptionCan" xml:space="preserve">
-    <value>The Windows Command Palette (Canary build)</value>
+    <value>The MagicalGirlWand launcher (Canary build)</value>
     <comment>{Locked}</comment>
   </data>
   <data name="AppDescriptionPre" xml:space="preserve">
-    <value>The Windows Command Palette (Preview build)</value>
+    <value>The MagicalGirlWand launcher (Preview build)</value>
   </data>
   <data name="StartupTaskName" xml:space="preserve">
-    <value>Command Palette</value>
+    <value>MagicalGirlWand</value>
     <comment>{Locked=qps-ploc,qps-ploca,qps-plocm}</comment>
   </data>
   <data name="StartupTaskNameDev" xml:space="preserve">
-    <value>Command Palette Dev</value>
+    <value>MagicalGirlWand Dev</value>
     <comment>{Locked} The dev build will never be seen in multiple languages</comment>
   </data>
   <data name="Activation_Shortcut_Cancel" xml:space="preserve">
@@ -222,8 +222,8 @@ Right-click to remove the key combination, thereby deactivating the shortcut.</v
     <comment>The ** sequences are used for text formatting of the key names. Don't remove them on translation.</comment>
   </data>
   <data name="CmdPalSettingsHeader.Text" xml:space="preserve">
-    <value>Command Palette settings</value>
-    <comment>A section header for app-wide settings. "Command Palette" is the name of the app.</comment>
+    <value>MagicalGirlWand settings</value>
+    <comment>A section header for app-wide settings. "MagicalGirlWand" is the name of the app.</comment>
   </data>
   <data name="AboutSettingsHeader.Text" xml:space="preserve">
     <value>About</value>
@@ -266,11 +266,11 @@ Right-click to remove the key combination, thereby deactivating the shortcut.</v
     <comment>Displayed on a toggle controlling the extension's enabled / disabled state</comment>
   </data>
   <data name="SettingsWindowTitle" xml:space="preserve">
-    <value>Command Palette Settings</value>
+    <value>MagicalGirlWand Settings</value>
     <comment>The title of the settings window for the app</comment>
   </data>
   <data name="ToastWindowTitle" xml:space="preserve">
-    <value>Command Palette Toast</value>
+    <value>MagicalGirlWand Toast</value>
     <comment>The title of the toast window for the command palette</comment>
   </data>
   <data name="DefaultSearchPlaceholderText" xml:space="preserve">
@@ -278,11 +278,11 @@ Right-click to remove the key combination, thereby deactivating the shortcut.</v
   </data>
   <data name="Run_PositionHeader.Header" xml:space="preserve">
     <value>Preferred monitor position</value>
-    <comment>as in Show Command Palette on primary monitor</comment>
+    <comment>as in Show MagicalGirlWand on primary monitor</comment>
   </data>
   <data name="Run_PositionHeader.Description" xml:space="preserve">
-    <value>If multiple monitors are in use, Command Palette can be launched on the desired monitor</value>
-    <comment>as in Show Command Palette on primary monitor</comment>
+    <value>If multiple monitors are in use, MagicalGirlWand can be launched on the desired monitor</value>
+    <comment>as in Show MagicalGirlWand on primary monitor</comment>
   </data>
   <data name="Run_Radio_Position_Cursor.Content" xml:space="preserve">
     <value>Monitor with mouse cursor</value>
@@ -306,7 +306,7 @@ Right-click to remove the key combination, thereby deactivating the shortcut.</v
     <value>Global hotkey</value>
   </data>
   <data name="Settings_ExtensionPage_GlobalHotkey_SettingsCard.Description" xml:space="preserve">
-    <value>Directly open Command Palette to this command.</value>
+    <value>Directly open MagicalGirlWand to this command.</value>
   </data>
   <data name="Settings_ExtensionPage_Alias_SettingsCard.Header" xml:space="preserve">
     <value>Alias</value>
@@ -327,19 +327,19 @@ Right-click to remove the key combination, thereby deactivating the shortcut.</v
     <value>Built-in</value>
   </data>
   <data name="Settings_ExtensionPage_Builtin_SettingsCard.Description" xml:space="preserve">
-    <value>These commands are built-in to the Windows Command Palette.</value>
+    <value>These commands are built-in to the MagicalGirlWand.</value>
   </data>
   <data name="Settings_GeneralPage_ActivationKey_SettingsExpander.Header" xml:space="preserve">
     <value>Activation key</value>
   </data>
   <data name="Settings_GeneralPage_ActivationKey_SettingsExpander.Description" xml:space="preserve">
-    <value>This key will open the Command Palette.</value>
+    <value>This key will open the MagicalGirlWand.</value>
   </data>
   <data name="Settings_GeneralPage_LowLevelHook_SettingsCard.Header" xml:space="preserve">
     <value>Use low-level keyboard hook</value>
   </data>
   <data name="Settings_GeneralPage_LowLevelHook_SettingsCard.Description" xml:space="preserve">
-    <value>Try this if there are issues with the shortcut (Command Palette might not get focus when triggered from an elevated window)</value>
+    <value>Try this if there are issues with the shortcut (MagicalGirlWand might not get focus when triggered from an elevated window)</value>
   </data>
   <data name="Settings_GeneralPage_IgnoreShortcutWhenFullscreen_SettingsCard.Header" xml:space="preserve">
     <value>Ignore shortcut in fullscreen mode</value>
@@ -384,7 +384,7 @@ Right-click to remove the key combination, thereby deactivating the shortcut.</v
     <value>Keep previous query</value>
   </data>
   <data name="Settings_GeneralPage_KeepPreviousQuery_SettingsCard.Description" xml:space="preserve">
-    <value>Preserves the last search text when Command Palette is reopened</value>
+    <value>Preserves the last search text when MagicalGirlWand is reopened</value>
   </data>
   <data name="Settings_GeneralPage_ShowAppDetails_SettingsCard.Header" xml:space="preserve">
     <value>Show app details</value>
@@ -405,7 +405,7 @@ Right-click to remove the key combination, thereby deactivating the shortcut.</v
     <value>Choose how to interact with list items: single-click to activate, or single-click to select and double-click to activate</value>
   </data>
   <data name="Settings_GeneralPage_About_SettingsExpander.Header" xml:space="preserve">
-    <value>Windows Command Palette</value>
+    <value>MagicalGirlWand</value>
   </data>
   <data name="Settings_GeneralPage_About_SettingsExpander.Description" xml:space="preserve">
     <value>© 2026. All rights reserved.</value>
@@ -435,7 +435,7 @@ Right-click to remove the key combination, thereby deactivating the shortcut.</v
     <value>Dock (Preview)</value>
   </data>
   <data name="SettingsButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
-    <value>Open Command Palette settings, shortcut Control plus comma</value>
+    <value>Open MagicalGirlWand settings, shortcut Control plus comma</value>
   </data>
   <data name="ActivationSettingsHeader.Text" xml:space="preserve">
     <value>Activation</value>
@@ -456,7 +456,7 @@ Right-click to remove the key combination, thereby deactivating the shortcut.</v
     <value>Show system tray icon</value>
   </data>
   <data name="Settings_GeneralPage_ShowSystemTrayIcon_SettingsCard.Description" xml:space="preserve">
-    <value>Choose if Command Palette is visible in the system tray</value>
+    <value>Choose if MagicalGirlWand is visible in the system tray</value>
   </data>
   <data name="Settings_GeneralPage_DisableAnimations_SettingsCard.Header" xml:space="preserve">
     <value>Disable animations</value>
@@ -524,7 +524,7 @@ Right-click to remove the key combination, thereby deactivating the shortcut.</v
     <value>Enable external reload</value>
   </data>
   <data name="Settings_GeneralPage_AllowExternalReload_SettingsCard.Description" xml:space="preserve">
-    <value>Trigger reload of the extension externally with the x-cmdpal://reload command</value>
+    <value>Trigger reload of the extension externally with the x-magicalgirlwand://reload command</value>
   </data>
   <data name="ForDevelopersSettingsHeader.Text" xml:space="preserve">
     <value>For developers</value>
@@ -575,10 +575,10 @@ Right-click to remove the key combination, thereby deactivating the shortcut.</v
     <value>Search extensions</value>
   </data>
   <data name="GlobalErrorHandler_CrashMessageBox_Message" xml:space="preserve">
-    <value>Command Palette has encountered a fatal error and must close.</value>
+    <value>MagicalGirlWand has encountered a fatal error and must close.</value>
   </data>
   <data name="GlobalErrorHandler_CrashMessageBox_Caption" xml:space="preserve">
-    <value>Command Palette - Fatal error</value>
+    <value>MagicalGirlWand - Fatal error</value>
   </data>
   <data name="Settings_GeneralPage_AutoGoHome_Item_Never.Content" xml:space="preserve">
     <value>Never</value>
@@ -611,7 +611,7 @@ Right-click to remove the key combination, thereby deactivating the shortcut.</v
     <value>Automatically return home</value>
   </data>
   <data name="Settings_GeneralPage_AutoGoHome_SettingsCard.Description" xml:space="preserve">
-    <value>Automatically returns to home page after a period of inactivity when Command Palette is closed</value>
+    <value>Automatically returns to home page after a period of inactivity when MagicalGirlWand is closed</value>
   </data>
   <data name="Settings_GeneralPage_NavigationViewItem_Appearance.Content" xml:space="preserve">
     <value>Personalization</value>
@@ -887,11 +887,11 @@ Right-click to remove the key combination, thereby deactivating the shortcut.</v
     <value>Mica automatically adapts to your desktop wallpaper. Custom backgrounds and opacity settings are not available for this material.</value>
   </data>
   <data name="Settings_AppearancePage_OpenCommandPaletteButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
-    <value>Open Command Palette</value>
-    <comment>Button to open the Command Palette window to preview appearance changes</comment>
+    <value>Open MagicalGirlWand</value>
+    <comment>Button to open the MagicalGirlWand window to preview appearance changes</comment>
   </data>
   <data name="Settings_AppearancePage_OpenCommandPaletteButton_Text.Text" xml:space="preserve">
-    <value>Open Command Palette</value>
+    <value>Open MagicalGirlWand</value>
   </data>
   <data name="Settings_AppearancePage_ResetAppearanceButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Reset appearance settings</value>
@@ -1026,7 +1026,7 @@ Right-click to remove the key combination, thereby deactivating the shortcut.</v
     <value>All available bands are already pinned.</value>
   </data>
     <data name="Dock_Pin_Instruction.Text" xml:space="preserve">
-    <value>To pin commands, extensions or apps, use the Pin to Dock command in Command Palette.</value>
+    <value>To pin commands, extensions or apps, use the Pin to Dock command in MagicalGirlWand.</value>
   </data>
     <data name="Dock_Bands_Header.Text" xml:space="preserve">
     <value>Bands</value>
@@ -1047,10 +1047,10 @@ Right-click to remove the key combination, thereby deactivating the shortcut.</v
     <value>Discard</value>
   </data>
   <data name="CmdPal_LearnMore.Content" xml:space="preserve">
-    <value>Learn more about Command Palette</value>
+    <value>Learn more about MagicalGirlWand</value>
   </data>
   <data name="CmdPalDock_LearnMore.Content" xml:space="preserve">
-    <value>Learn more about Command Palette Dock</value>
+    <value>Learn more about MagicalGirlWand Dock</value>
   </data>
   <data name="SettingsPage_NewInfoBadge.Text" xml:space="preserve">
     <value>NEW</value>

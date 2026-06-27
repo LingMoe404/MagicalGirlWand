@@ -6,6 +6,6 @@
     <XesBaseYearForStoreVersion>2025</XesBaseYearForStoreVersion>
     <VersionMajor>0</VersionMajor>
     <VersionMinor>11</VersionMinor>
-    <VersionInfoProductName>Microsoft Command Palette</VersionInfoProductName>
+    <VersionInfoProductName>MagicalGirlWand</VersionInfoProductName>
   </PropertyGroup>
 </Project>

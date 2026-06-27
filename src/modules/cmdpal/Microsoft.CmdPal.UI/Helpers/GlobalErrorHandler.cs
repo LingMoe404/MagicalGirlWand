@@ -14,7 +14,7 @@ using XamlUnhandledExceptionEventArgs = Microsoft.UI.Xaml.UnhandledExceptionEven
 namespace Microsoft.CmdPal.UI.Helpers;
 
 /// <summary>
-/// Global error handler for Command Palette.
+/// Global error handler for MagicalGirlWand.
 /// </summary>
 internal sealed partial class GlobalErrorHandler : IDisposable
 {
@@ -85,8 +85,8 @@ internal sealed partial class GlobalErrorHandler : IDisposable
             {
                 // The resource loader may not be available if the exception occurred during startup.
                 // Fall back to hardcoded strings in that case.
-                message = "Command Palette has encountered a fatal error and must close.";
-                caption = "Command Palette - Fatal error";
+                message = "MagicalGirlWand has encountered a fatal error and must close.";
+                caption = "MagicalGirlWand - Fatal error";
             }
 
             PInvoke.MessageBox(

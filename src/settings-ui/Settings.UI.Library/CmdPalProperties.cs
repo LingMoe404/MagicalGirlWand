@@ -10,8 +10,8 @@ namespace Microsoft.PowerToys.Settings.UI.Library
 {
     public class CmdPalProperties
     {
-        // Default shortcut - Win + Alt + Space
-        public static readonly HotkeySettings DefaultHotkeyValue = new HotkeySettings(true, false, true, false, 32);
+        // Default shortcut - Alt + Space
+        public static readonly HotkeySettings DefaultHotkeyValue = new HotkeySettings(false, false, true, false, 32);
 
 #pragma warning disable SA1401 // Fields should be private
 #pragma warning disable CA1051 // Do not declare visible instance fields
@@ -26,9 +26,9 @@ namespace Microsoft.PowerToys.Settings.UI.Library
             var localAppDataDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
 #if DEBUG
-            _settingsFilePath = Path.Combine(localAppDataDir, "Packages", "Microsoft.CommandPalette.Dev_8wekyb3d8bbwe", "LocalState", "settings.json");
+            _settingsFilePath = Path.Combine(localAppDataDir, "Packages", "LingMoe.MagicalGirlWand.Dev_8wekyb3d8bbwe", "LocalState", "settings.json");
 #else
-            _settingsFilePath = Path.Combine(localAppDataDir, "Packages", "Microsoft.CommandPalette_8wekyb3d8bbwe", "LocalState", "settings.json");
+            _settingsFilePath = Path.Combine(localAppDataDir, "Packages", "LingMoe.MagicalGirlWand_8wekyb3d8bbwe", "LocalState", "settings.json");
 #endif
 
             InitializeHotkey();

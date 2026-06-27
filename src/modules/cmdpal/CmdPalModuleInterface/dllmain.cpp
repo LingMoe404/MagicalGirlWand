@@ -140,7 +140,7 @@ public:
 
     CmdPal()
     {
-        app_name = L"CmdPal";
+        app_name = L"MagicalGirlWand";
         app_key = L"CmdPal";
         LoggerHelpers::init_logger(app_key, L"ModuleInterface", "CmdPal");
 
@@ -218,12 +218,13 @@ public:
 
         CmdPal::m_enabled.store(true);
 
-        std::wstring packageName = L"Microsoft.CommandPalette";
+        std::wstring packageName = L"LingMoe.MagicalGirlWand";
         // Launch CmdPal as normal user using explorer
         std::wstring launchPath = L"explorer.exe";
-        std::wstring launchArgs = L"x-cmdpal://background";
+        std::wstring launchArgs = L"x-magicalgirlwand://background";
 #ifdef IS_DEV_BRANDING
-        packageName = L"Microsoft.CommandPalette.Dev";
+        packageName = L"LingMoe.MagicalGirlWand.Dev";
+        launchArgs = L"x-magicalgirlwand-dev://background";
 #endif
 
         if (!package::GetRegisteredPackage(packageName, false).has_value())

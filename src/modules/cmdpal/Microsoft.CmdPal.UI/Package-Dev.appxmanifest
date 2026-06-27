@@ -19,7 +19,7 @@
   IgnorableNamespaces="uap mp rescap uap3 uap17 desktop6 virtualization">
 
   <Identity
-    Name="Microsoft.CommandPalette.Dev"
+    Name="LingMoe.MagicalGirlWand.Dev"
     Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
     Version="0.0.1.0" />
 
@@ -27,7 +27,7 @@
 
   <Properties>
     <DisplayName>ms-resource:AppNameDev</DisplayName>
-    <PublisherDisplayName>A Lone Developer</PublisherDisplayName>
+    <PublisherDisplayName>LingMoe</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
     <desktop6:RegistryWriteVirtualization>disabled</desktop6:RegistryWriteVirtualization>
   </Properties>
@@ -59,7 +59,7 @@
 
         <uap3:Extension Category="windows.appExtensionHost">
           <uap3:AppExtensionHost>
-            <uap3:Name>com.microsoft.commandpalette</uap3:Name>
+            <uap3:Name>moe.ling.magicalgirlwand.dev</uap3:Name>
           </uap3:AppExtensionHost>
         </uap3:Extension>
 
@@ -71,9 +71,9 @@
         </uap5:Extension>
 
         <uap:Extension Category="windows.protocol">
-          <uap:Protocol Name="x-cmdpal">
+          <uap:Protocol Name="x-magicalgirlwand-dev">
             <uap:Logo>Assets\StoreLogo.png</uap:Logo>
-            <uap:DisplayName>Command Palette Dev URI scheme</uap:DisplayName>
+            <uap:DisplayName>MagicalGirlWand Dev URI scheme</uap:DisplayName>
           </uap:Protocol>
         </uap:Extension>
 

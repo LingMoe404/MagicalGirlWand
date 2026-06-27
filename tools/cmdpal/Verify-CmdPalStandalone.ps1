@@ -100,6 +100,76 @@ if ($retainedForbiddenRoots.Count -ne 0) {
     throw "Standalone repository retains unrelated PowerToys infrastructure roots: $($retainedForbiddenRoots -join ', ')"
 }
 
+$cmdPalCustomProps = Get-Content -Raw -LiteralPath (Join-Path $RepoRoot 'src\modules\cmdpal\custom.props')
+if ($cmdPalCustomProps -notmatch '<VersionInfoProductName>MagicalGirlWand</VersionInfoProductName>') {
+    throw 'custom.props must brand VersionInfoProductName as MagicalGirlWand.'
+}
+
+$cmdPalManifest = Get-Content -Raw -LiteralPath (Join-Path $RepoRoot 'src\modules\cmdpal\Microsoft.CmdPal.UI\Package.appxmanifest')
+if ($cmdPalManifest -notmatch 'Name="LingMoe\.MagicalGirlWand"') {
+    throw 'Package.appxmanifest must use the standalone package identity LingMoe.MagicalGirlWand.'
+}
+
+if ($cmdPalManifest -notmatch '<uap3:Name>moe\.ling\.magicalgirlwand</uap3:Name>') {
+    throw 'Package.appxmanifest must use the standalone app extension host name moe.ling.magicalgirlwand.'
+}
+
+$cmdPalDevManifest = Get-Content -Raw -LiteralPath (Join-Path $RepoRoot 'src\modules\cmdpal\Microsoft.CmdPal.UI\Package-Dev.appxmanifest')
+if ($cmdPalDevManifest -notmatch 'Name="LingMoe\.MagicalGirlWand\.Dev"') {
+    throw 'Package-Dev.appxmanifest must use the standalone package identity LingMoe.MagicalGirlWand.Dev.'
+}
+
+if ($cmdPalDevManifest -notmatch '<uap3:Name>moe\.ling\.magicalgirlwand\.dev</uap3:Name>') {
+    throw 'Package-Dev.appxmanifest must use the standalone app extension host name moe.ling.magicalgirlwand.dev.'
+}
+
+$cmdPalAppManifest = Get-Content -Raw -LiteralPath (Join-Path $RepoRoot 'src\modules\cmdpal\Microsoft.CmdPal.UI\app.manifest')
+if ($cmdPalAppManifest -notmatch 'name="MagicalGirlWand\.app"') {
+    throw 'app.manifest must use the standalone assembly identity MagicalGirlWand.app.'
+}
+
+$cmdPalProgram = Get-Content -Raw -LiteralPath (Join-Path $RepoRoot 'src\modules\cmdpal\Microsoft.CmdPal.UI\Program.cs')
+if ($cmdPalProgram -notmatch [regex]::Escape('Logger.InitializeLogger("\\MagicalGirlWand\\Logs\\")')) {
+    throw 'Program.cs must write logs under the standalone MagicalGirlWand directory.'
+}
+
+$cmdPalModuleInterface = Get-Content -Raw -LiteralPath (Join-Path $RepoRoot 'src\modules\cmdpal\CmdPalModuleInterface\dllmain.cpp')
+foreach ($expectedModuleValue in @(
+        'LingMoe.MagicalGirlWand',
+        'LingMoe.MagicalGirlWand.Dev',
+        'x-magicalgirlwand://background',
+        'x-magicalgirlwand-dev://background')) {
+    if ($cmdPalModuleInterface -notmatch [regex]::Escape($expectedModuleValue)) {
+        throw "CmdPalModuleInterface must launch the standalone identity/protocol: $expectedModuleValue"
+    }
+}
+
+$cmdPalMainWindow = Get-Content -Raw -LiteralPath (Join-Path $RepoRoot 'src\modules\cmdpal\Microsoft.CmdPal.UI\MainWindow.xaml.cs')
+if ($cmdPalMainWindow -notmatch [regex]::Escape('x-magicalgirlwand-dev://')) {
+    throw 'MainWindow.xaml.cs must handle the standalone dev protocol.'
+}
+
+$cmdPalSettingsUiProperties = Get-Content -Raw -LiteralPath (Join-Path $RepoRoot 'src\settings-ui\Settings.UI.Library\CmdPalProperties.cs')
+foreach ($expectedSettingsUiValue in @(
+        'new HotkeySettings(false, false, true, false, 32)',
+        'LingMoe.MagicalGirlWand_8wekyb3d8bbwe',
+        'LingMoe.MagicalGirlWand.Dev_8wekyb3d8bbwe')) {
+    if ($cmdPalSettingsUiProperties -notmatch [regex]::Escape($expectedSettingsUiValue)) {
+        throw "CmdPalProperties must use standalone settings identity/defaults: $expectedSettingsUiValue"
+    }
+}
+
+$cmdPalResources = Get-Content -Raw -LiteralPath (Join-Path $RepoRoot 'src\modules\cmdpal\Microsoft.CmdPal.UI\Strings\en-us\Resources.resw')
+foreach ($expectedResource in @(
+        '<value>MagicalGirlWand</value>',
+        '<value>MagicalGirlWand Dev</value>',
+        '<value>The MagicalGirlWand launcher</value>',
+        '<value>MagicalGirlWand settings</value>')) {
+    if ($cmdPalResources -notmatch [regex]::Escape($expectedResource)) {
+        throw "Resources.resw must contain standalone branding resource: $expectedResource"
+    }
+}
+
 $projects = @(Get-SolutionFilterProjects -FilterPath $filter -RepoRoot $RepoRoot)
 if ($projects.Count -lt 50) {
     throw "Expected the CmdPal filter to contain at least 50 projects; got $($projects.Count)."

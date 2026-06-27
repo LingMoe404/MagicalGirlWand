@@ -81,7 +81,7 @@ public partial class ErrorReportSanitizerTests
         internal static string Input2 =>
             $"""
              ============================================================
-             Hello World! Command Palette is starting.
+             Hello World! MagicalGirlWand is starting.
 
              Application:
                App version:           0.0.1.0
@@ -98,15 +98,15 @@ public partial class ErrorReportSanitizerTests
                UI culture:            en-US
 
              Paths:
-               Log directory:         {Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\Microsoft\PowerToys\CmdPal\Logs\0.0.1.0
-               Config directory:      {Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\Packages\Microsoft.CommandPalette.Dev_8wekyb3d8bbwe\LocalState
+               Log directory:         {Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\Microsoft\PowerToys\MagicalGirlWand\Logs\0.0.1.0
+               Config directory:      {Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\Packages\LingMoe.MagicalGirlWand.Dev_8wekyb3d8bbwe\LocalState
              ============================================================
              """;
 
         public const string Expected2 =
             """
             ============================================================
-            Hello World! Command Palette is starting.
+            Hello World! MagicalGirlWand is starting.
 
             Application:
               App version:           0.0.1.0
@@ -123,8 +123,8 @@ public partial class ErrorReportSanitizerTests
               UI culture:            en-US
 
             Paths:
-              Log directory:         [LOCALAPPLICATIONDATA_DIR]Microsoft\PowerToys\CmdPal\Logs\0.0.1.0
-              Config directory:      [LOCALAPPLICATIONDATA_DIR]Packages\Microsoft.CommandPalette.Dev_8wekyb3d8bbwe\LocalState
+              Log directory:         [LOCALAPPLICATIONDATA_DIR]Microsoft\PowerToys\MagicalGirlWand\Logs\0.0.1.0
+              Config directory:      [LOCALAPPLICATIONDATA_DIR]Packages\LingMoe.MagicalGirlWand.Dev_8wekyb3d8bbwe\LocalState
             ============================================================
             """;
     }

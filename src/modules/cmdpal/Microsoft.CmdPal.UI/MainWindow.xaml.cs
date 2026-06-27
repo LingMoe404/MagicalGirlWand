@@ -1078,18 +1078,18 @@ public sealed partial class MainWindow : WindowEx,
                 {
                     if (protocolArgs.Uri.ToString() is string uri)
                     {
-                        // was the URI "x-cmdpal://background" ?
-                        if (uri.StartsWith("x-cmdpal://background", StringComparison.OrdinalIgnoreCase))
+                        // Was the URI a background activation?
+                        if (IsProtocolCommand(uri, "background"))
                         {
                             // we're running, we don't want to activate our window. bail
                             return;
                         }
-                        else if (uri.StartsWith("x-cmdpal://settings", StringComparison.OrdinalIgnoreCase))
+                        else if (IsProtocolCommand(uri, "settings"))
                         {
                             WeakReferenceMessenger.Default.Send<OpenSettingsMessage>(new());
                             return;
                         }
-                        else if (uri.StartsWith("x-cmdpal://reload", StringComparison.OrdinalIgnoreCase))
+                        else if (IsProtocolCommand(uri, "reload"))
                         {
                             var settings = App.Current.Services.GetRequiredService<ISettingsService>().Settings;
                             if (settings?.AllowExternalReload == true)
@@ -1121,19 +1121,24 @@ public sealed partial class MainWindow : WindowEx,
                 Logger.LogWarning(
                     $"COM exception (HRESULT {ex.HResult}) when accessing activation arguments. " +
                     $"This might be due to the calling application not passing them correctly or exiting before we could read them. " +
-                    $"The application will continue running and fall back to showing the Command Palette window.");
+                    $"The application will continue running and fall back to showing the MagicalGirlWand window.");
             }
             else
             {
                 Logger.LogError(
                     $"COM exception (HRESULT {ex.HResult}) when activating the application. " +
-                    $"The application will continue running and fall back to showing the Command Palette window.",
+                    $"The application will continue running and fall back to showing the MagicalGirlWand window.",
                     ex);
             }
         }
 
         Summon(string.Empty);
     }
+
+    private static bool IsProtocolCommand(string uri, string command) =>
+        uri.StartsWith($"x-magicalgirlwand://{command}", StringComparison.OrdinalIgnoreCase) ||
+        uri.StartsWith($"x-magicalgirlwand-dev://{command}", StringComparison.OrdinalIgnoreCase) ||
+        uri.StartsWith($"x-cmdpal://{command}", StringComparison.OrdinalIgnoreCase);
 
     public void Summon(string commandId) =>
 

@@ -40,7 +40,7 @@ internal sealed class Program
 
         try
         {
-            Logger.InitializeLogger("\\CmdPal\\Logs\\");
+            Logger.InitializeLogger("\\MagicalGirlWand\\Logs\\");
         }
         catch (COMException e)
         {
@@ -49,7 +49,7 @@ internal sealed class Program
             PInvoke.MessageBox(
                 (HWND)IntPtr.Zero,
                 $"Failed to initialize the logger. COMException: \r{e.Message}",
-                "Command Palette",
+                "MagicalGirlWand",
                 MESSAGEBOX_STYLE.MB_OK | MESSAGEBOX_STYLE.MB_ICONERROR);
             return 0;
         }
@@ -60,7 +60,7 @@ internal sealed class Program
             PInvoke.MessageBox(
                 (HWND)IntPtr.Zero,
                 $"Failed to initialize the logger. Unknown Exception: \r{e2.Message}",
-                "Command Palette",
+                "MagicalGirlWand",
                 MESSAGEBOX_STYLE.MB_OK | MESSAGEBOX_STYLE.MB_ICONERROR);
             return 0;
         }
@@ -73,7 +73,7 @@ internal sealed class Program
             var appInfoService = new ApplicationInfoService(() => Logger.CurrentVersionLogDirectoryPath);
             var startupMessage = $"""
                 ============================================================
-                Hello World! Command Palette is starting.
+                Hello World! MagicalGirlWand is starting.
 
                 {appInfoService.GetApplicationInfoSummary()}
                 ============================================================
