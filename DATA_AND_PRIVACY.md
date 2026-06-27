@@ -1,10 +1,10 @@
 # MagicalGirlWand 数据与隐私
 
-MagicalGirlWand 是聚焦 standalone CmdPal 的 fork，不是 Microsoft PowerToys 官方发行版。本仓库本身不运营额外的云端分析服务。
+MagicalGirlWand 目前没有自己的账号系统、云同步或云端分析服务。本页说明这个项目与 CmdPal 相关的数据边界。
 
 ## 本地会保存什么
 
-根据构建和运行方式，CmdPal 以及保留的上游设置代码可能会在本地保存：
+根据版本和运行方式，CmdPal 可能会在本地保存：
 
 - 应用设置和快捷键偏好。
 - 扩展配置。
@@ -15,7 +15,7 @@ MagicalGirlWand 是聚焦 standalone CmdPal 的 fork，不是 Microsoft PowerToy
 
 ## 诊断事件
 
-保留的上游 telemetry 代码中可能仍存在 `Microsoft.PowerToys.*` 命名空间，尤其是 CmdPal 和共享组件相关事件。这些名称是继承自上游的实现细节，不代表本仓库是 Microsoft 官方 telemetry 端点。
+源码中可能仍存在 `Microsoft.PowerToys.*` telemetry 命名空间，尤其是 CmdPal 和共享组件相关事件。这些名称来自上游实现，不表示 MagicalGirlWand 提供 Microsoft 官方诊断服务。
 
 MagicalGirlWand 文档只把 CmdPal 相关诊断行为视为当前范围：
 
@@ -28,10 +28,6 @@ MagicalGirlWand 文档只把 CmdPal 相关诊断行为视为当前范围：
 
 如果 telemetry 行为发生变化，需要同步更新本文档，写清事件名、收集字段、隐私影响和用户是否可以关闭。
 
-## 不应该写在这里的内容
-
-不要把 Microsoft PowerToys 的完整诊断事件表复制到本仓库。MagicalGirlWand 不应把 FancyZones、Color Picker、Advanced Paste、Image Resizer、Keyboard Manager、Workspaces 等无关模块写成当前产品功能。
-
 ## issue 和附件
 
 报告问题时：
@@ -41,6 +37,6 @@ MagicalGirlWand 文档只把 CmdPal 相关诊断行为视为当前范围：
 - 避免公开文件路径、剪贴板内容、命令历史或扩展凭据。
 - 安全敏感内容请使用私密漏洞报告渠道。
 
-## 上游隐私文档
+## PowerToys 官方版本
 
-Microsoft PowerToys 官方隐私和诊断政策请参考上游 Microsoft PowerToys 项目。本文只描述 MagicalGirlWand 仓库的文档边界。
+如果你使用的是 Microsoft PowerToys 官方发行版，请以 Microsoft PowerToys 的隐私和诊断政策为准。FancyZones、Color Picker、Advanced Paste、Image Resizer、Keyboard Manager、Workspaces 等工具不属于 MagicalGirlWand 的当前功能范围。

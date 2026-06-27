@@ -1,13 +1,13 @@
 ## 摘要
 
-<!-- 具体说明改了什么。范围请聚焦 MagicalGirlWand / standalone CmdPal。 -->
+<!-- 具体说明改了什么。范围请聚焦 MagicalGirlWand / 独立 CmdPal。 -->
 
 ## 范围
 
 - [ ] CmdPal app / UI
 - [ ] CmdPal extensions
 - [ ] Extension SDK / Toolkit / template
-- [ ] 构建、安装器或 standalone 验证
+- [ ] 构建、安装器或独立 CmdPal 验证
 - [ ] 仅文档
 - [ ] 其他：
 

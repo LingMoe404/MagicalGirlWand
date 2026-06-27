@@ -1,12 +1,12 @@
 # 安全政策
 
-MagicalGirlWand 不是 Microsoft 拥有的仓库，也不适用 Microsoft Security Response Center 流程。
+MagicalGirlWand 的安全报告由本项目维护者处理。Microsoft PowerToys 官方发行版漏洞请按 Microsoft 的流程报告。
 
 ## 报告漏洞
 
 请不要通过公开 GitHub issue 披露安全漏洞。
 
-如果本仓库启用了 GitHub private vulnerability reporting，请优先使用该功能。若不可用，请通过仓库维护者公开资料中的联系方式建立安全沟通渠道，并只分享建立沟通所需的最少信息。
+如果本仓库启用了 GitHub private vulnerability reporting，请优先使用该功能。若不可用，请通过维护者主页中的联系方式建立安全沟通渠道，并只分享建立沟通所需的最少信息。
 
 请尽量提供：
 
@@ -26,7 +26,7 @@ MagicalGirlWand 不是 Microsoft 拥有的仓库，也不适用 Microsoft Securi
 - 内置扩展对文件、剪贴板、环境变量和进程的访问。
 - 任何处理 secrets、tokens、本地路径或用户输入的代码。
 
-## 不在本仓库处理的范围
+## 不在这里处理的范围
 
 - 上游 Microsoft PowerToys 官方发行版漏洞应报告给 Microsoft。
 - 第三方工具或扩展自身漏洞应报告给对应维护者，除非 MagicalGirlWand 的改动改变了风险。

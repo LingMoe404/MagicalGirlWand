@@ -1,6 +1,6 @@
 # 支持
 
-MagicalGirlWand 是聚焦 standalone CmdPal 的项目，不是 Microsoft PowerToys 官方支持渠道。
+MagicalGirlWand 是聚焦独立 CmdPal 的项目。Microsoft PowerToys 官方发行版问题请到上游项目反馈。
 
 ## 获取帮助
 
@@ -20,6 +20,6 @@ MagicalGirlWand 是聚焦 standalone CmdPal 的项目，不是 Microsoft PowerTo
 
 ## 支持范围
 
-本仓库支持 standalone CmdPal 应用、内置扩展、Extension SDK、构建脚本，以及 standalone 依赖图仍然需要的保留组件。
+这里处理独立 CmdPal 应用、内置扩展、Extension SDK、构建脚本和安装相关问题。若问题出在 CmdPal 构建必须依赖的共享代码，也可以在这里报告。
 
 FancyZones、Color Picker、Advanced Paste、Image Resizer 或 Microsoft PowerToys 官方发行版相关问题，请转到上游 PowerToys 项目。

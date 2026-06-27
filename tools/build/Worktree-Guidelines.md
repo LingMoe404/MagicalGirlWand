@@ -65,7 +65,7 @@ Git worktree 允许多个工作目录共享同一个 `.git` object store。
 
 1. 如果依赖还没准备好，运行 `tools\build\build-essentials.cmd`。
 2. 只构建相关 project 或 solution filter。
-3. 修改 standalone 依赖图时运行 `pwsh -NoProfile -File tools\cmdpal\Verify-CmdPalStandalone.ps1`。
+3. 修改独立 CmdPal 依赖图时运行 `pwsh -NoProfile -File tools\cmdpal\Verify-CmdPalStandalone.ps1`。
 4. 提交并推送。
 5. 工作完成后删除 worktree。
 

@@ -41,7 +41,7 @@ tools\build\build.ps1 -Platform x64 -Configuration Release
 tools\build\build.ps1 -RestoreOnly
 ```
 
-## standalone CmdPal 验证
+## 独立 CmdPal 验证
 
 修改项目引用、保留依赖路径、构建脚本或仓库范围文档时，运行：
 
@@ -49,7 +49,7 @@ tools\build\build.ps1 -RestoreOnly
 pwsh -NoProfile -File tools\cmdpal\Verify-CmdPalStandalone.ps1
 ```
 
-这个脚本会验证 `MagicalGirlWand.slnx`、CmdPal solution filters 和 standalone 依赖保留清单。
+这个脚本会验证 `MagicalGirlWand.slnx`、CmdPal solution filters 和依赖保留清单。
 
 ## 日志与排错
 
