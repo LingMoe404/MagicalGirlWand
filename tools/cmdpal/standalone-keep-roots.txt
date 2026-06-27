@@ -25,7 +25,6 @@ src/Common.Dotnet.PrepareGeneratedFolder.targets
 src/Common.SelfContained.props
 src/settings-ui/Directory.Build.targets
 
-# Build and documentation infrastructure retained for the standalone graph.
+# Build and verification infrastructure retained for the standalone graph.
 tools/build
 tools/cmdpal
-doc/devdocs/development
