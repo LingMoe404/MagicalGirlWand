@@ -5,50 +5,54 @@
 <h1 align="center">MagicalGirlWand</h1>
 
 <p align="center">
-  Standalone CmdPal, rebadged and trimmed to the pieces this repo actually ships.
+  把 CmdPal 从 PowerToys 里拆出来，做成一个只保留自己该有东西的独立仓库。
 </p>
 
 <p align="center">
-  <a href="#what-ships">What ships</a>
+  <a href="#现在有什么">现在有什么</a>
   <span> · </span>
-  <a href="#build">Build</a>
+  <a href="#怎么跑">怎么跑</a>
   <span> · </span>
-  <a href="#contributing">Contributing</a>
+  <a href="#怎么改">怎么改</a>
   <span> · </span>
-  <a href="#license">License</a>
+  <a href="#许可">许可</a>
 </p>
 
-## What ships
+## 现在有什么
 
-- CmdPal launcher, bound by default to `Win+Alt+Space`
-- the extension gallery and extension SDK
-- the built-in create-extension flow and sample extensions
-- MagicalGirlWand branding, assets, and settings
+- CmdPal 启动器，默认快捷键是 `Win+Alt+Space`
+- 扩展画廊
+- 扩展 SDK
+- `Create extension` 创建扩展流程
+- 示例扩展和样例页面
+- MagicalGirlWand 的品牌、图标和设置
 
-## Build
+## 怎么跑
 
-First build, or if NuGet packages are missing:
+第一次构建，或者 NuGet 还没准备好时：
 
 ```powershell
 tools\build\build-essentials.cmd
 ```
 
-Then build the solution:
+然后编译解决方案：
 
 ```powershell
 tools\build\build.ps1 -Platform x64 -Configuration Debug
 ```
 
-For a release build:
+想做 Release：
 
 ```powershell
 tools\build\build.ps1 -Platform x64 -Configuration Release
 ```
 
-## Contributing
+## 怎么改
 
-Keep changes atomic and build before pushing. When changing CmdPal behavior, run the repo verifier and the relevant build or test target before you commit.
+- 改 CmdPal 行为前，先跑 `tools\cmdpal\Verify-CmdPalStandalone.ps1`
+- 修改后先保证能 build，再提交
+- 只保留这个仓库真的还会用到的文档、脚本和资源
 
-## License
+## 许可
 
-See [LICENSE](LICENSE).
+见 [LICENSE](LICENSE)。
